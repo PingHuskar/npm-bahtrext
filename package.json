@@ -1,0 +1,11 @@
+{
+  "name": "bahtrext",
+  "version": "1.0.3",
+  "description": "BahtText without limit!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chadin Chaipornpisuth",
+  "license": "ISC"
+}
