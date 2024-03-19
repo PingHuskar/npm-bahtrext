@@ -1,6 +1,6 @@
 {
   "name": "bahtrext",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "BahtText without limit!",
   "main": "index.js",
   "scripts": {

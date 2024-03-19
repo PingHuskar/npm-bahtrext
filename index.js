@@ -111,7 +111,13 @@ const BahtText = (money, currencyformat= THB, arrow = READAS, ClErr = MoneyInval
   return `${currencyformat ? currencyformat.format(moneyFull) : moneyFull} ${arrow} "${PrintBaht(moneyInt)}${PrintSatangs(moneyFrac)}"`;
 };
 
-console.log(BahtText(`11.1`))
+const BulkBahtText = (str, pat=/\b(\d+)(\.\d{0,2}0*)?\b/g) => {
+  if (!str) return null;
+  for (const match of str.match(pat)) {
+    str = str.replace(match, BahtText(match).split('"').at(-2));
+  }
+  return str
+} 
 
 module.exports = {
   SPECIALONE,
@@ -131,5 +137,6 @@ module.exports = {
   PrintBaht,
   PrintSatangs,
   THB,
-  BahtText
+  BahtText,
+  BulkBahtText
 }
