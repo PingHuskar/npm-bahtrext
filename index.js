@@ -111,9 +111,25 @@ const BahtText = (money, currencyformat= THB, arrow = READAS, ClErr = MoneyInval
   return `${currencyformat ? currencyformat.format(moneyFull) : moneyFull} ${arrow} "${PrintBaht(moneyInt)}${PrintSatangs(moneyFrac)}"`;
 };
 
-const BulkBahtText = (str, pat=/\b(\d+)(\.\d{0,2}0*)?\b/g) => {
+const IsMatchInSkipsPattern = (match,skips) => {
+  for (const skip of skips) {
+    if (skip.test(match)) return true
+  }
+  return false
+}
+
+const defaultBulkBahtTextPat = /\b(\d+)(\.\d{0,2}0*)?\b/g
+const defaultBulkBahtTextSkips = [
+  /\b5+\+?\b/
+]
+
+const BulkBahtText = (str, pat=defaultBulkBahtTextPat, skips=defaultBulkBahtTextSkips) => {
+  if (typeof str !== 'string') return `Invalid Type`;
   if (!str) return null;
-  for (const match of str.match(pat)) {
+  const matches = str.match(pat)
+  if (!matches) return str;
+  for (const match of matches) {
+    if (IsMatchInSkipsPattern(match, skips)) continue
     str = str.replace(match, BahtText(match).split('"').at(-2));
   }
   return str
