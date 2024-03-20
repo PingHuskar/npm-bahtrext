@@ -10,8 +10,22 @@ const READAS = `อ่านว่า`
 const LAST6DIGITPATTERN = /\d{1,6}$/g;
 const SPLITPATTERN = /^(\d*)(\.\d{0,2}0*)?$/;
 
-const THAINUMBERWORDS = [`ศูนย์`,`หนึ่ง`,`สอง`,`สาม`,`สี่`,`ห้า`,`หก`,`เจ็ด`,`แปด`,`เก้า`,`สิบ`]
-const REVERSETHAIDIGITWORDS = ["แสน", "หมื่น", "พัน", "ร้อย", "สิบ", ""]
+const ZERO = `ศูนย์`
+const ONE = `หนึ่ง`
+const TWO = `สอง`
+const THREE = `สาม`
+const FOUR = `สี่`
+const FIVE = `ห้า`
+const SIX = `หก`
+const SEVEN = `เจ็ด`
+const EIGHT = `แปด`
+const NINE = `เก้า`
+const THAINUMBERWORDS = [ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN]
+const HUNDRED = `ร้อย`
+const THOUSAND = `พัน`
+const TENTHOUSAND = `หมื่น`
+const HUNDREDTHOUSAND = `แสน`
+const REVERSETHAIDIGITWORDS = [HUNDREDTHOUSAND, TENTHOUSAND, THOUSAND, HUNDRED, TEN, ""]
 
 const MoneyInvalid = (money) => `Your Input is Invalid Format!\nThis is Your Input : ${money}\nTry Again`;
 
@@ -57,7 +71,7 @@ const hundredThousandToOne = (digits) => {
   return word;
 };
 
-const LeandingEdToOne = (money) => money.replace(/^เอ็ด(?=(ล้าน)+)/,`หนึ่ง`)
+const LeandingEdToOne = (money) => money.replace(/^เอ็ด(?=(ล้าน)+)/,ONE)
 
 const PrintBaht = (money) => {
   if (!money) return `` 
