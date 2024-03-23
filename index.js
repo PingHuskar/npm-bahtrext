@@ -21,6 +21,8 @@ const SEVEN = `เจ็ด`
 const EIGHT = `แปด`
 const NINE = `เก้า`
 const THAINUMBERWORDS = [ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN]
+const LTHAISATANGWORDS = [``,SPECIALONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE]
+const FTHAISATANGWORDS = [``,``,SPECIALTWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE]
 const HUNDRED = `ร้อย`
 const THOUSAND = `พัน`
 const TENTHOUSAND = `หมื่น`
@@ -115,15 +117,21 @@ let THB = new Intl.NumberFormat('th-TH', {
   currency: 'THB',
 });
 
-const BahtText = (money, currencyformat= THB, arrow = READAS, ClErr = MoneyInvalid,InvalidType=`Invalid Type`, NoInput=null) => {
+const BahtText = (money, currencyformat= THB, arrow = READAS, ClErr = MoneyInvalid,InvalidType=`"Invalid Type"`, NoInput=null) => {
   if (!money) return NoInput
   if (typeof money !== 'string') return InvalidType;
   const cleanedMoney = MoneyLaundering(money);
   if (!IsMoneyValidate(cleanedMoney) || money === `.`) return ClErr(money)
   const [moneyFull, moneyInt, moneyFrac] = splitIntFrac(cleanedMoney);
-  if (moneyFull.match(/^(0*)(\.0*)?$/)) return `${THAINUMBERWORDS[0]}${BAHT}${FULLBAHT}`
+  if (moneyFull.match(/^(0*)(\.0*)?$/)) return `${currencyformat ? currencyformat.format(moneyFull) : moneyFull} ${arrow} "${THAINUMBERWORDS[0]}${BAHT}${FULLBAHT}"`
   return `${currencyformat ? currencyformat.format(moneyFull) : moneyFull} ${arrow} "${PrintBaht(moneyInt)}${PrintSatangs(moneyFrac)}"`;
 };
+
+const BT = (money) => {
+  const rBahtText = BahtText(money)
+  if (!rBahtText) return undefined
+  return rBahtText.split('"').at(-2)
+}
 
 const IsMatchInSkipsPattern = (match,skips) => {
   for (const skip of skips) {
@@ -147,7 +155,31 @@ const BulkBahtText = (str, pat=defaultBulkBahtTextPat, skips=defaultBulkBahtText
     str = str.replace(match, BahtText(match).split('"').at(-2));
   }
   return str
-} 
+}
+
+const ValidSATANGRegex = /((ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?(สิบ))?(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?สตางค์|(หนึ่งสตางค์)|(ถ้วน)/gs
+
+const NumText = (str, arr=THAINUMBERWORDS, flag=`g`) => {
+  if (!str) return undefined
+  if (typeof str !== 'string') return `Invalid Type`;
+  for (const i in arr) {
+    str = str.replace(new RegExp(i,flag), arr[i])
+  }
+  return str
+}
+
+const SatangNum = (moneySatang) => {
+  if (moneySatang == FULLBAHT) return `00`
+  else if (/^(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ)$/.test(moneySatang)) {
+    return `${padWithLeadingZeros(THAINUMBERWORDS.indexOf(moneySatang),2)}`
+  } else if (/^สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)$/.test(moneySatang)) {
+    return `1${LTHAISATANGWORDS.indexOf(moneySatang.split(TEN).at(-1))}`
+  } else if (/^(ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?$/.test(moneySatang)) {
+    const [f,l] = moneySatang.split(TEN)
+    return `${FTHAISATANGWORDS.indexOf(f)}${LTHAISATANGWORDS.indexOf(l)}`
+  }
+  return undefined
+}
 
 module.exports = {
   SPECIALONE,
@@ -161,6 +193,8 @@ module.exports = {
   SPLITPATTERN,
   REVERSETHAIDIGITWORDS,
   THAINUMBERWORDS,
+  FTHAISATANGWORDS,
+  LTHAISATANGWORDS,
   MoneyLaundering,
   IsMoneyValidate,
   splitIntFrac,
@@ -168,5 +202,9 @@ module.exports = {
   PrintSatangs,
   THB,
   BahtText,
-  BulkBahtText
+  BT,
+  BulkBahtText,
+  ValidSATANGRegex,
+  NumText,
+  SatangNum
 }

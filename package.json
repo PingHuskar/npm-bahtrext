@@ -1,15 +1,18 @@
 {
   "name": "bahtrext",
-  "version": "1.0.5",
-  "description": "Better than BahtText",
+  "version": "1.0.8",
+  "description": "Better BahtText",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Chadin Chaipornpisuth",
   "license": "ISC",
   "keywords": [
     "BahtText",
     "regex"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

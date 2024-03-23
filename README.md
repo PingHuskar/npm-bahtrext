@@ -9,5 +9,13 @@
 3. CleanCode + No Comment
 
 ## Fixes
+- 1.0.8 - add SatangNum
+- 1.0.6 - BT is main function
 - 1.0.3 - validation + parameters + callback
 - 1.0.2 - exports
+
+## Test Regex
+- [ValidSATANGRegex](https://regex101.com/r/yVvsFN/1)
+
+## 😊 Support Dev
+- [True Money Wallet](https://tmn.app.link/txb6QYGBcIb)
