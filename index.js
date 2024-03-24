@@ -31,10 +31,12 @@ const REVERSETHAIDIGITWORDS = [HUNDREDTHOUSAND, TENTHOUSAND, THOUSAND, HUNDRED, 
 
 const MoneyInvalid = (money) => `Your Input is Invalid Format!\nThis is Your Input : ${money}\nTry Again`;
 
+const removeLeadingingZeros = (string) => string.replace(/^0+/g, "")
+
 const MoneyLaundering = (money) => {
   const removeComma = money.replace(/,/g, "");
-  const removeCommaAndTrailingZeros = removeComma.replace(/^0+/g, "");
-  return removeCommaAndTrailingZeros;
+  const removeCommaAndLeadingingZeros = removeLeadingingZeros(removeComma);
+  return removeCommaAndLeadingingZeros;
 };
 const IsMoneyValidate = (money) => SPLITPATTERN.test(money);
 const splitIntFrac = (money) => {
@@ -168,17 +170,53 @@ const NumText = (str, arr=THAINUMBERWORDS, flag=`g`) => {
   return str
 }
 
+const OneToTenTextRegex = /^(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ)$/
+const ElevenToNineteenRegex = /^สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)$/
+const TwentyToNinetyNine = /^(ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?$/
+
 const SatangNum = (moneySatang) => {
   if (moneySatang == FULLBAHT) return `00`
-  else if (/^(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ)$/.test(moneySatang)) {
+  else if (OneToTenTextRegex.test(moneySatang)) {
     return `${padWithLeadingZeros(THAINUMBERWORDS.indexOf(moneySatang),2)}`
-  } else if (/^สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)$/.test(moneySatang)) {
+  } else if (ElevenToNineteenRegex.test(moneySatang)) {
     return `1${LTHAISATANGWORDS.indexOf(moneySatang.split(TEN).at(-1))}`
-  } else if (/^(ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?$/.test(moneySatang)) {
+  } else if (TwentyToNinetyNine.test(moneySatang)) {
     const [f,l] = moneySatang.split(TEN)
     return `${FTHAISATANGWORDS.indexOf(f)}${LTHAISATANGWORDS.indexOf(l)}`
   }
   return undefined
+}
+
+const TB = (BT, error=`Invalid String`) => {
+  console.warn(`do not use this function in production`)
+  if (!BT) return undefined
+  const [moneyBaht, moneySatang] = BT.split(BAHT)
+  if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
+    return `0.${SatangNum(moneyBaht.replace(SATANG,``))}`
+  }
+  const moneyBahts = []
+  const millions = moneyBaht.split(MILLION).reverse()
+  for (const million of millions) {
+    if (SatangNum(million)) {
+      moneyBahts.push(padWithLeadingZeros(SatangNum(million),6))
+      continue
+    }
+    const THUNDREDTHOUSAND = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?แสน/.exec(million)?.at(1) || ZERO
+    const VHUNDREDTHOUSAND = THAINUMBERWORDS.indexOf(THUNDREDTHOUSAND)
+    const TTENTHOUSAND = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?หมื่น/.exec(million)?.at(1) || ZERO
+    const VTENTHOUSAND = THAINUMBERWORDS.indexOf(TTENTHOUSAND)
+    const TTHOUSAND = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?พัน/.exec(million)?.at(1) || ZERO
+    const VTHOUSAND = THAINUMBERWORDS.indexOf(TTHOUSAND)
+    const THUNDRED = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?ร้อย/.exec(million)?.at(1) || ZERO
+    const VHUNDRED = THAINUMBERWORDS.indexOf(THUNDRED)
+    const VL = SatangNum(million.split(HUNDRED)?.at(1)) || `00`
+    moneyBahts.push(padWithLeadingZeros(`${VHUNDREDTHOUSAND}${VTENTHOUSAND}${VTHOUSAND}${VHUNDRED}${VL}`,6))
+  }
+  return `${removeLeadingingZeros(moneyBahts.reverse().join(""))}.${SatangNum(moneySatang.replace(SATANG, ``))|| `00`}`
+}
+
+const IsValidTB = (str) => {
+  return str === BT(TB(str)).replace(FULLBAHT, '')
 }
 
 module.exports = {
@@ -196,6 +234,7 @@ module.exports = {
   FTHAISATANGWORDS,
   LTHAISATANGWORDS,
   MoneyLaundering,
+  removeLeadingingZeros,
   IsMoneyValidate,
   splitIntFrac,
   PrintBaht,
@@ -205,6 +244,11 @@ module.exports = {
   BT,
   BulkBahtText,
   ValidSATANGRegex,
+  OneToTenTextRegex,
+  ElevenToNineteenRegex,
+  TwentyToNinetyNine,
   NumText,
-  SatangNum
+  SatangNum,
+  TB,
+  IsValidTB
 }

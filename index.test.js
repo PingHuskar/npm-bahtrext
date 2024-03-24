@@ -26,6 +26,13 @@ test('PrintSatangs', () =>{
     expect(BR.PrintSatangs(`1`)).toBe(`สิบสตางค์`)
     expect(BR.PrintSatangs(``)).toBe(`ถ้วน`)
 })
+
+test(`BulkBahtText`, () =>{
+    expect(BR.BulkBahtText(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)).toBe(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)
+    expect(BR.BulkBahtText(`"900 ถูกมาก" ตุยไปละ`).replace(`ถ้วน`,``)).toBe(`"เก้าร้อยบาท ถูกมาก" ตุยไปละ`)
+    expect(BR.BulkBahtText(`ค่าโง่จำนำข้าว 200000000000`).replace(`ถ้วน`,``)).toBe(`ค่าโง่จำนำข้าว สองแสนล้านบาท`)
+})
+
 test('SatangNum', () => {
     expect(BR.SatangNum("ถ้วน")).toBe("00")
     expect(BR.SatangNum("หนึ่ง")).toBe("01")
@@ -129,3 +136,22 @@ test('SatangNum', () => {
     expect(BR.SatangNum("เก้าสิบเก้า")).toBe("99")
     expect(BR.SatangNum("ร้อย")).toBe(undefined)
 })
+
+test('Reverse BahtText', () => {
+    expect(BR.TB(BR.BT(`123`))).toBe(`123.00`);
+    expect(BR.TB(BR.BT(`72`))).toBe(`72.00`);
+    expect(BR.TB(BR.BT(`50000072.00`))).toBe(`50000072.00`);
+    expect(BR.TB(BR.BT(`8.00`))).toBe(`8.00`)
+    expect(BR.TB(BR.BT(`5678.00`))).toBe(`5678.00`)
+    expect(BR.TB(BR.BT(`63147.89`))).toBe(`63147.89`)
+    expect(BR.TB(BR.BT(`51000001.00`))).toBe(`51000001.00`)
+    expect(BR.TB(BR.BT(`422.26`))).toBe(`422.26`)
+    expect(BR.TB(BR.BT(`191415.11`))).toBe(`191415.11`)
+    expect(BR.TB(BR.BT(`1.01`))).toBe(`1.01`)
+    expect(BR.TB(BR.BT(`5678.46`))).toBe(`5678.46`)
+    expect(BR.TB(BR.BT(`0.67`))).toBe(`0.67`)
+    expect(BR.TB(BR.BT(`317.10`))).toBe(`317.10`)
+    expect(BR.TB(BR.BT(`11.11`))).toBe(`11.11`)
+    expect(BR.TB(BR.BT(`230000.00`))).toBe(`230000.00`)
+    expect(BR.TB(BR.BT(`84000.00`))).toBe(`84000.00`)
+});

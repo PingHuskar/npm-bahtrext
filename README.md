@@ -9,6 +9,7 @@
 3. CleanCode + No Comment
 
 ## Fixes
+- 1.0.9 - add TB (reverse BT)
 - 1.0.8 - add SatangNum
 - 1.0.6 - BT is main function
 - 1.0.3 - validation + parameters + callback
