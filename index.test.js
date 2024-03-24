@@ -6,6 +6,7 @@ test('NumText', () => {
 
 test('BT', () => {
     expect(BR.BT(`lol`)).toBe(undefined);
+    expect(BR.BT(`2000000000000.00`)).toBe(`สองล้านล้านบาทถ้วน`)
     expect(BR.BT(`123`)).toBe(`หนึ่งร้อยยี่สิบสามบาทถ้วน`);
     expect(BR.BT(`8.00`)).toBe(`แปดบาทถ้วน`)
     expect(BR.BT(`5678.00`)).toBe(`ห้าพันหกร้อยเจ็ดสิบแปดบาทถ้วน`)
@@ -138,20 +139,21 @@ test('SatangNum', () => {
 })
 
 test('Reverse BahtText', () => {
-    expect(BR.TB(BR.BT(`123`))).toBe(`123.00`);
-    expect(BR.TB(BR.BT(`72`))).toBe(`72.00`);
-    expect(BR.TB(BR.BT(`50000072.00`))).toBe(`50000072.00`);
-    expect(BR.TB(BR.BT(`8.00`))).toBe(`8.00`)
-    expect(BR.TB(BR.BT(`5678.00`))).toBe(`5678.00`)
-    expect(BR.TB(BR.BT(`63147.89`))).toBe(`63147.89`)
-    expect(BR.TB(BR.BT(`51000001.00`))).toBe(`51000001.00`)
-    expect(BR.TB(BR.BT(`422.26`))).toBe(`422.26`)
-    expect(BR.TB(BR.BT(`191415.11`))).toBe(`191415.11`)
-    expect(BR.TB(BR.BT(`1.01`))).toBe(`1.01`)
-    expect(BR.TB(BR.BT(`5678.46`))).toBe(`5678.46`)
-    expect(BR.TB(BR.BT(`0.67`))).toBe(`0.67`)
-    expect(BR.TB(BR.BT(`317.10`))).toBe(`317.10`)
-    expect(BR.TB(BR.BT(`11.11`))).toBe(`11.11`)
-    expect(BR.TB(BR.BT(`230000.00`))).toBe(`230000.00`)
-    expect(BR.TB(BR.BT(`84000.00`))).toBe(`84000.00`)
+    const warn = false
+    expect(BR.TB(BR.BT(`123`), warn)).toBe(`123.00`);
+    expect(BR.TB(BR.BT(`72`), warn)).toBe(`72.00`);
+    expect(BR.TB(BR.BT(`50000072.00`), warn)).toBe(`50000072.00`);
+    expect(BR.TB(BR.BT(`8.00`), warn)).toBe(`8.00`);
+    expect(BR.TB(BR.BT(`5678.00`), warn)).toBe(`5678.00`);
+    expect(BR.TB(BR.BT(`63147.89`), warn)).toBe(`63147.89`);
+    expect(BR.TB(BR.BT(`51000001.00`), warn)).toBe(`51000001.00`);
+    expect(BR.TB(BR.BT(`422.26`), warn)).toBe(`422.26`);
+    expect(BR.TB(BR.BT(`191415.11`), warn)).toBe(`191415.11`);
+    expect(BR.TB(BR.BT(`1.01`), warn)).toBe(`1.01`);
+    expect(BR.TB(BR.BT(`5678.46`), warn)).toBe(`5678.46`);
+    expect(BR.TB(BR.BT(`0.67`), warn)).toBe(`0.67`);
+    expect(BR.TB(BR.BT(`317.10`), warn)).toBe(`317.10`);
+    expect(BR.TB(BR.BT(`11.11`), warn)).toBe(`11.11`);
+    expect(BR.TB(BR.BT(`230000.00`), warn)).toBe(`230000.00`);
+    expect(BR.TB(BR.BT(`84000.00`), warn)).toBe(`84000.00`);
 });

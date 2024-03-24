@@ -187,8 +187,8 @@ const SatangNum = (moneySatang) => {
   return undefined
 }
 
-const TB = (BT, error=`Invalid String`) => {
-  console.warn(`do not use this function in production`)
+const TB = (BT, warn = true, error=`Invalid String`) => {
+  if (warn) console.warn(`do not use this function in production`)
   if (!BT) return undefined
   const [moneyBaht, moneySatang] = BT.split(BAHT)
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
@@ -215,8 +215,8 @@ const TB = (BT, error=`Invalid String`) => {
   return `${removeLeadingingZeros(moneyBahts.reverse().join(""))}.${SatangNum(moneySatang.replace(SATANG, ``))|| `00`}`
 }
 
-const IsValidTB = (str) => {
-  return str === BT(TB(str)).replace(FULLBAHT, '')
+const IsValidTB = (str, warn = true) => {
+  return str === BT(TB(str, warn)).replace(FULLBAHT, '')
 }
 
 module.exports = {
