@@ -1,3 +1,5 @@
+const DEBUG = false;
+
 const SPECIALONE = `เอ็ด`
 const SPECIALTWO = `ยี่`
 const TEN = `สิบ`;
@@ -187,8 +189,7 @@ const SatangNum = (moneySatang) => {
   return undefined
 }
 
-const TB = (BT, warn = true, error=`Invalid String`) => {
-  if (warn) console.warn(`do not use this function in production`)
+const TB = (BT, error=`Invalid String`) => {
   if (!BT) return undefined
   const [moneyBaht, moneySatang] = BT.split(BAHT)
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
@@ -201,6 +202,32 @@ const TB = (BT, warn = true, error=`Invalid String`) => {
       moneyBahts.push(padWithLeadingZeros(SatangNum(million),6))
       continue
     }
+    const iHUNDREDTHOUSAND = million.indexOf(HUNDREDTHOUSAND);
+    const iTENTHOUSAND = million.indexOf(TENTHOUSAND);
+    const iTHOUSAND = million.indexOf(THOUSAND);
+    const iHUNDRED = million.indexOf(HUNDRED);
+    const iTEN = million.indexOf(TEN);
+    const iiTEN = iTEN == -1 ? 0 : iTEN;
+    const iiHUNDRED = iHUNDRED == -1 ? 0 : iHUNDRED;
+    const iiTHOUSAND = iTHOUSAND == -1 ? 0 : iTHOUSAND;
+    const iiTENTHOUSAND = iTENTHOUSAND == -1 ? 0 : iTENTHOUSAND;
+    const iiHUNDREDTHOUSAND = iHUNDREDTHOUSAND == -1 ? 0 : iHUNDREDTHOUSAND;
+    if (DEBUG) {
+      console.log(iiTEN);
+      console.log(iiHUNDRED);
+      console.log(iiTHOUSAND);
+      console.log(iiTENTHOUSAND);
+      console.log(iiHUNDREDTHOUSAND);
+    }
+      if (
+      !(
+        (iiTEN >= iiHUNDRED || iiTEN == 0) &&
+        (iiHUNDRED >= iiTHOUSAND || iiHUNDRED == 0) &&
+        (iiTHOUSAND >= iiTENTHOUSAND || iiTHOUSAND == 0) &&
+        (iiTENTHOUSAND >= iiHUNDREDTHOUSAND || iiTENTHOUSAND == 0)
+      )
+    )
+      return error;
     const THUNDREDTHOUSAND = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?แสน/.exec(million)?.at(1) || ZERO
     const VHUNDREDTHOUSAND = THAINUMBERWORDS.indexOf(THUNDREDTHOUSAND)
     const TTENTHOUSAND = /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?หมื่น/.exec(million)?.at(1) || ZERO
@@ -215,8 +242,8 @@ const TB = (BT, warn = true, error=`Invalid String`) => {
   return `${removeLeadingingZeros(moneyBahts.reverse().join(""))}.${SatangNum(moneySatang.replace(SATANG, ``))|| `00`}`
 }
 
-const IsValidTB = (str, warn = true) => {
-  return str === BT(TB(str, warn)).replace(FULLBAHT, '')
+const IsValidTB = (str) => {
+  return str === BT(TB(str)).replace(FULLBAHT, '')
 }
 
 module.exports = {

@@ -6,13 +6,13 @@
 ## Beliefs
 1. Money in Thai Baht can be translate to word
 2. Decimal places is only 2 digits; Banks stored 6 digits of decimal places if you want more digits, use Crypto
-3. CleanCode + No Comment
+3. CleanCode + Comment as Code
 
 ## Fixes
+- 1.1.0 - TB Ready for Production?!
 - 1.0.9 - add TB (reverse BT)
 - 1.0.8 - add SatangNum
 - 1.0.6 - BT is main function
-- 1.0.3 - validation + parameters + callback
 - 1.0.2 - exports
 
 ## Test Regex
