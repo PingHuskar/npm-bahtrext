@@ -2,6 +2,9 @@
 ![Download/month](https://img.shields.io/npm/dm/bahtrext.svg)
 ![Total Download](https://img.shields.io/npm/dt/bahtrext.svg)
 
+## Demo
+- [Codepen](https://codepen.io/chadin-chaipornpisuth/full/rNbzyom)
+
 ## Must Read
 - **`101`** ควรจะถูกอ่านอย่างไร ?
   - `หนึ่งร้อยหนึ่งบาทถ้วน`
