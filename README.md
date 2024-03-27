@@ -6,12 +6,12 @@
 - **`101`** ควรจะถูกอ่านอย่างไร ?
   - `หนึ่งร้อยหนึ่งบาทถ้วน`
     - `Google Sheets`
+    - `สัญญากู้เงินของธนาคาร`* ลองมากู้ได้เลยครับ ถ้าไม่ใช่บอกผมด้วย
     - [**`BahtRext`**](https://github.com/PingHuskar/npm-bahtrext)
     - จะอ่านว่า`เอ็ด`เมื่อหลักสิบมีค่า เช่น `สิบเอ็ด`, `ยี่สิบเอ็ด`
   - `หนึ่งร้อยเอ็ดบาทถ้วน`
     - `MS Excel`
     - [`thai-baht-text`](https://www.npmjs.com/package/thai-baht-text)
-
 
 ## Beliefs
 1. Money in Thai Baht can be translate to word
@@ -19,6 +19,7 @@
 3. CleanCode + Comment as Code
 
 ## Fixes
+- 1.1.3 - add LNBT
 - 1.1.1 
   - Fix TB validation
   - BF is main function
