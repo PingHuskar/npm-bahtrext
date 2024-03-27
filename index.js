@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-const VERSION = `1.1.3`
+const VERSION = `1.1.5`
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -81,8 +81,11 @@ const removeLeadingingZeros = (string) => string.replace(/^0+/g, "");
 
 const MoneyLaundering = (money) => {
   const removeComma = money.replace(/,/g, "");
-  const removeCommaAndLeadingingZeros = removeLeadingingZeros(removeComma);
-  return removeCommaAndLeadingingZeros;
+  const removeCommaAndUnderScore = removeComma.replace(/_/g, "");
+  const removeCommaAndUnderScoreAndLeadingingZeros = removeLeadingingZeros(
+    removeCommaAndUnderScore
+  );
+  return removeCommaAndUnderScoreAndLeadingingZeros;
 };
 const IsMoneyValidate = (money) => SPLITPATTERN.test(money);
 const splitIntFrac = (money) => {
@@ -154,6 +157,7 @@ const SatangSecondDigit = (digit) => {
 
 const PrintSatangs = (satangs) => {
   if (satangs.match(/^0*$/)) return FULLBAHT;
+  if (!(/^\d{0,2}$/.test(satangs))) return undefined;
   let satangword = `${SatangFirstDigit(satangs[0])}${SatangSecondDigit(
     satangs
   )}${SATANG}`;
@@ -281,6 +285,7 @@ const SatangNum = (moneySatang) => {
 
 const TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;
+  if (!(/สตางค์$/.test(BT)) && !(/บาท$/.test(BT)) && !(/ถ้วน$/.test(BT))) return error;
   const [moneyBaht, moneySatang] = BT.split(BAHT);
   if (DEBUG) console.log(moneyBaht, moneySatang);
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {

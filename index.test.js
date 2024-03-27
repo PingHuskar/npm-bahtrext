@@ -2,6 +2,7 @@ const BR = require('./index');
 
 test('NumText', () => {
     expect(BR.NumText(`ไม่เอา123`)).toBe(`ไม่เอาหนึ่งสองสาม`);
+    expect(BR.NumText(84000)).toBe(`Invalid Type`);
 });
 
 test('BT', () => {
@@ -20,6 +21,7 @@ test('BT', () => {
     expect(BR.BT(`5678.46`)).toBe(`ห้าพันหกร้อยเจ็ดสิบแปดบาทสี่สิบหกสตางค์`)
     expect(BR.BT(`0.67`)).toBe(`หกสิบเจ็ดสตางค์`)
     expect(BR.BT(`768,601,800,000,000`)).toBe(`เจ็ดร้อยหกสิบแปดล้านหกแสนหนึ่งพันแปดร้อยล้านบาทถ้วน`)
+    expect(BR.BT(`768_601_800_000_000`)).toBe(`เจ็ดร้อยหกสิบแปดล้านหกแสนหนึ่งพันแปดร้อยล้านบาทถ้วน`)
 });
 
 test("ABT", () => {
@@ -51,6 +53,8 @@ test('PrintSatangs', () =>{
     expect(BR.PrintSatangs(`01`)).toBe(`หนึ่งสตางค์`)
     expect(BR.PrintSatangs(`1`)).toBe(`สิบสตางค์`)
     expect(BR.PrintSatangs(``)).toBe(`ถ้วน`)
+    expect(BR.PrintSatangs(`dd`)).toBe(undefined)
+    expect(BR.PrintSatangs(`999`)).toBe(undefined);
 })
 
 test(`BulkBahtText`, () =>{
@@ -169,6 +173,10 @@ test(`TB`, () => {
     expect(BR.TB(`สามแสนสิบบาทถ้วน`)).toBe(`300010.00`);
     expect(BR.TB(`สิบหนึ่งบาทถ้วน`)).toBe(`Invalid String`);
     expect(BR.TB(`สองสิบหนึ่งบาทถ้วน`)).toBe(`Invalid String`);
+    expect(BR.TB(`สี่บาทหก`)).toBe(`Invalid String`);
+    expect(BR.TB(`สี่บาทหกสิบ`)).toBe(`Invalid String`);
+    expect(BR.TB(`สี่บาทหกสิบสตางค์`)).toBe(`4.60`);
+    expect(BR.TB(`สี่บาทหกสตางค์`)).toBe(`4.06`);
 })
 
 test('Reverse BahtText', () => {
