@@ -265,8 +265,10 @@ const TwentyToNinetyNine =
   /^(ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)สิบ(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?$/;
 
 const SatangNum = (moneySatang) => {
-  if (moneySatang == FULLBAHT) return `00`;
-  else if (OneToTenTextRegex.test(moneySatang)) {
+  if (DEBUG)  console.log(moneySatang);
+  if (moneySatang == FULLBAHT) {
+    return `00`;
+  } else if (OneToTenTextRegex.test(moneySatang)) {
     return `${padWithLeadingZeros(THAINUMBERWORDS.indexOf(moneySatang), 2)}`;
   } else if (ElevenToNineteenRegex.test(moneySatang)) {
     return `1${LTHAISATANGWORDS.indexOf(moneySatang.split(TEN).at(-1))}`;
@@ -280,9 +282,12 @@ const SatangNum = (moneySatang) => {
 const TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;
   const [moneyBaht, moneySatang] = BT.split(BAHT);
+  if (DEBUG) console.log(moneyBaht, moneySatang);
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
     return `0.${SatangNum(moneyBaht.replace(SATANG, ``))}`;
   }
+  const retSatang = SatangNum(moneySatang.replace(SATANG, ``));
+  if (!retSatang) return error;
   const moneyBahts = [];
   const millions = moneyBaht.split(MILLION).reverse();
   for (const million of millions) {
@@ -320,9 +325,9 @@ const TB = (BT, error = `Invalid String`) => {
           iiHUNDRED >= iiTENTHOUSAND &&
           iiHUNDRED >= iiHUNDREDTHOUSAND) ||
           iiHUNDRED == 0) &&
-        ((iiTHOUSAND >= iiTENTHOUSAND && 
-          iiTHOUSAND >= iiHUNDREDTHOUSAND) ||
-          iiTHOUSAND == 0) &&
+          ((iiTHOUSAND >= iiTENTHOUSAND && 
+            iiTHOUSAND >= iiHUNDREDTHOUSAND) ||
+            iiTHOUSAND == 0) &&
         (iiTENTHOUSAND >= iiHUNDREDTHOUSAND || iiTENTHOUSAND == 0)
       )
     )
@@ -359,7 +364,7 @@ const TB = (BT, error = `Invalid String`) => {
     );
   }
   return `${removeLeadingingZeros(moneyBahts.reverse().join(""))}.${
-    SatangNum(moneySatang.replace(SATANG, ``)) || `00`
+    SatangNum(moneySatang.replace(SATANG, ``))
   }`;
 };
 
