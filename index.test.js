@@ -59,8 +59,18 @@ test('PrintSatangs', () =>{
 
 test(`BulkBahtText`, () =>{
     expect(BR.BulkBahtText(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)).toBe(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)
-    expect(BR.BulkBahtText(`"900 ถูกมาก" ตุยไปละ`).replace(`ถ้วน`,``)).toBe(`"เก้าร้อยบาท ถูกมาก" ตุยไปละ`)
-    expect(BR.BulkBahtText(`ค่าโง่จำนำข้าว 200000000000`).replace(`ถ้วน`,``)).toBe(`ค่าโง่จำนำข้าว สองแสนล้านบาท`)
+    expect(
+      BR.BulkBahtText(`30฿รักษาทุกโรค`, /(\d+)(\.\d{0,2}0*)?\฿/g).replace(
+        BR.FULLBAHT,
+        ``
+      )
+    ).toBe(`สามสิบบาทรักษาทุกโรค`);
+    expect(BR.BulkBahtText(`"900 ถูกมาก" ตุยไปละ`).replace(BR.FULLBAHT, ``)).toBe(
+      `"เก้าร้อยบาท ถูกมาก" ตุยไปละ`
+    );
+    expect(
+      BR.BulkBahtText(`ค่าโง่จำนำข้าว 200000000000`).replace(BR.FULLBAHT, ``)
+    ).toBe(`ค่าโง่จำนำข้าว สองแสนล้านบาท`);
 })
 
 test('SatangNum', () => {
@@ -173,6 +183,8 @@ test(`TB`, () => {
     expect(BR.TB(`สามแสนสิบบาทถ้วน`)).toBe(`300010.00`);
     expect(BR.TB(`สิบหนึ่งบาทถ้วน`)).toBe(`Invalid String`);
     expect(BR.TB(`สองสิบหนึ่งบาทถ้วน`)).toBe(`Invalid String`);
+    expect(BR.TB(`สี่บาท`)).toBe(`4.00`);
+    expect(BR.TB(`สี่บาทถ้วน`)).toBe(`4.00`);
     expect(BR.TB(`สี่บาทหก`)).toBe(`Invalid String`);
     expect(BR.TB(`สี่บาทหกสิบ`)).toBe(`Invalid String`);
     expect(BR.TB(`สี่บาทหกสิบสตางค์`)).toBe(`4.60`);

@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-const VERSION = `1.1.5`
+const VERSION = `1.1.6`
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -246,7 +246,7 @@ const BulkBahtText = (
   if (!matches) return str;
   for (const match of matches) {
     if (IsMatchInSkipsPattern(match, skips)) continue;
-    str = str.replace(match, BahtText(match).split('"').at(-2));
+    str = str.replace(match, BahtText(match.replace(/[^\d]/g,'')).split('"').at(-2));
   }
   return str;
 };
@@ -285,7 +285,8 @@ const SatangNum = (moneySatang) => {
 
 const TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;
-  if (!(/สตางค์$/.test(BT)) && !(/บาท$/.test(BT)) && !(/ถ้วน$/.test(BT))) return error;
+  if (/บาท$/.test(BT)) BT = `${BT}${FULLBAHT}`
+  if (!(/สตางค์$/.test(BT)) && !(/ถ้วน$/.test(BT))) return error;
   const [moneyBaht, moneySatang] = BT.split(BAHT);
   if (DEBUG) console.log(moneyBaht, moneySatang);
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
