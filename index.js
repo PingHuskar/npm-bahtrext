@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-const VERSION = `1.1.6`
+const VERSION = `1.1.7`
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -129,17 +129,15 @@ const LeandingEdToOne = (money) => money.replace(/^เอ็ด(?=(ล้าน)
 const PrintBaht = (money) => {
   if (!money) return ``;
   let newMoney = [];
-  let f6 = true;
   while (money != ``) {
     let selectedupto6digit = money.match(LAST6DIGITPATTERN)[0];
     newMoney.push(
-      `${hundredThousandToOne(selectedupto6digit)}${f6 ? "" : MILLION}`
+      `${hundredThousandToOne(selectedupto6digit)}${MILLION}`
     );
-    f6 ? (f6 = !f6) : "";
     money = money.replace(LAST6DIGITPATTERN, "");
   }
   const cleanLeadingEd = LeandingEdToOne(newMoney.reverse().join(""));
-  return `${cleanLeadingEd}${BAHT}`;
+  return `${cleanLeadingEd.replace(/ล้าน$/, ``)}${BAHT}`;
 };
 
 const SatangFirstDigit = (digit) => {
@@ -466,17 +464,24 @@ const large_numbers = [
   { name: "Googol", powof10: 100 },
 ];
 
+const repeat = (str,x) => {
+  for (const i of x) {
+    str = `${str}`.repeat(i)
+  }
+  return str
+}
+
 const LNBT = (nameorpowerof10, d=`1`) => {
   const tnameorpowerof10 = typeof(nameorpowerof10)
   switch (tnameorpowerof10) {
     case `string`:
       try {
         if (nameorpowerof10 == `Googolplex`) {
-          return BT(d + `0`.repeat(10).repeat(10).repeat(10));
+          return `No Don't Try This`
         }
         const v = large_numbers.find(n => n.name === nameorpowerof10).powof10
         if (v < 0) return undefined
-        return BT(d + `0`.repeat(v));
+        return BT(d + repeat(`0`,[v]));
       } catch (error) {
         return undefined
       }
@@ -488,42 +493,46 @@ const LNBT = (nameorpowerof10, d=`1`) => {
   }
 }
 
-module.exports = {
-  VERSION,
-  SPECIALONE,
-  SPECIALTWO,
-  TEN,
-  BAHT,
-  SATANG,
-  FULLBAHT,
-  MILLION,
-  LAST6DIGITPATTERN,
-  SPLITPATTERN,
-  REVERSETHAIDIGITWORDS,
-  THAINUMBERWORDS,
-  FTHAISATANGWORDS,
-  LTHAISATANGWORDS,
-  MoneyLaundering,
-  removeLeadingingZeros,
-  IsMoneyValidate,
-  splitIntFrac,
-  PrintBaht,
-  PrintSatangs,
-  THB,
-  BahtText,
-  BT,
-  BulkBahtText,
-  ValidSATANGRegex,
-  OneToTenTextRegex,
-  ElevenToNineteenRegex,
-  TwentyToNinetyNine,
-  NumText,
-  SatangNum,
-  TB,
-  IsValidTB,
-  THAI2ARABICNumerals,
-  BF,
-  ABT,
-  large_numbers,
-  LNBT
-};
+if (!DEBUG) {
+
+  module.exports = {
+    VERSION,
+    SPECIALONE,
+    SPECIALTWO,
+    TEN,
+    BAHT,
+    SATANG,
+    FULLBAHT,
+    MILLION,
+    LAST6DIGITPATTERN,
+    SPLITPATTERN,
+    REVERSETHAIDIGITWORDS,
+    THAINUMBERWORDS,
+    FTHAISATANGWORDS,
+    LTHAISATANGWORDS,
+    MoneyLaundering,
+    removeLeadingingZeros,
+    IsMoneyValidate,
+    splitIntFrac,
+    PrintBaht,
+    PrintSatangs,
+    THB,
+    BahtText,
+    BT,
+    BulkBahtText,
+    ValidSATANGRegex,
+    OneToTenTextRegex,
+    ElevenToNineteenRegex,
+    TwentyToNinetyNine,
+    NumText,
+    SatangNum,
+    TB,
+    IsValidTB,
+    THAI2ARABICNumerals,
+    BF,
+    ABT,
+    repeat,
+    large_numbers,
+    LNBT,
+  };
+}

@@ -20,8 +20,11 @@
 1. Money in Thai Baht can be translate to word
 2. Decimal places is only 2 digits; Banks stored 6 digits of decimal places if you want more digits, use Crypto
 3. CleanCode + Comment as Code
+4. All Synchronous function
+5. This Number System not working well with large numbers. I hope we have a better solution for Version 2.
 
 ## Fixes
+- 1.1.7 - remove `Googolplex`
 - 1.1.3 - add LNBT
 - 1.1.1 
   - Fix TB validation
@@ -35,5 +38,9 @@
 ## Test Regex
 - [ValidSATANGRegex](https://regex101.com/r/yVvsFN/1)
 
-## 😊 Plz Consider Support Developer
+## 😊 Plz Consider
+- [Give A Star](https://github.com/PingHuskar/npm-bahtrext)
+- Write a Review
+- Submit Test Case(s)
+- [GitHub Sponsors](https://github.com/sponsors/PingHuskar)
 - [True Money Wallet](https://tmn.app.link/txb6QYGBcIb)

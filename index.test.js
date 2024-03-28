@@ -65,12 +65,22 @@ test(`BulkBahtText`, () =>{
         ``
       )
     ).toBe(`สามสิบบาทรักษาทุกโรค`);
+    expect(
+      BR.BulkBahtText(`เงินดิจิมอน 10000฿ ใช้ยังไง ได้วันไหน ใครได้บ้าง`)
+        .replace(BR.FULLBAHT, ``)
+        .replace(RegExp(`฿`,`g`), ``)
+    ).toBe(`เงินดิจิมอน หนึ่งหมื่นบาท ใช้ยังไง ได้วันไหน ใครได้บ้าง`);
     expect(BR.BulkBahtText(`"900 ถูกมาก" ตุยไปละ`).replace(BR.FULLBAHT, ``)).toBe(
       `"เก้าร้อยบาท ถูกมาก" ตุยไปละ`
     );
     expect(
       BR.BulkBahtText(`ค่าโง่จำนำข้าว 200000000000`).replace(BR.FULLBAHT, ``)
     ).toBe(`ค่าโง่จำนำข้าว สองแสนล้านบาท`);
+    expect(
+      BR.BulkBahtText(
+        `กู้ 2000000000000 ดอก 3000000000000 กู้ชาตินี้........ใช้หนี้ชาติหน้า`
+      ).replace(RegExp(`${BR.BAHT}${BR.FULLBAHT}`,`g`), ``)
+    ).toBe(`กู้ สองล้านล้าน ดอก สามล้านล้าน กู้ชาตินี้........ใช้หนี้ชาติหน้า`);
 })
 
 test('SatangNum', () => {
@@ -209,3 +219,7 @@ test('Reverse BahtText', () => {
     expect(BR.TB(BR.BT(`230000.00`))).toBe(`230000.00`);
     expect(BR.TB(BR.BT(`84000.00`))).toBe(`84000.00`);
 });
+
+test('repeat',() => {
+  expect(BR.repeat(`ค`,[3])).toBe(`คคค`);
+})
