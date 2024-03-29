@@ -8,10 +8,16 @@ test('NumText', () => {
 test('BT', () => {
     expect(BR.BT(`lol`)).toBe(undefined);
     expect(BR.BT(`2000000000000.00`)).toBe(`สองล้านล้านบาทถ้วน`)
+    expect(BR.BT(`1000001000001`)).toBe(`หนึ่งล้านหนึ่งล้านหนึ่งบาทถ้วน`);
+    expect(BR.BT(`1000001000001`, true)).toBe(`หนึ่งล้านเอ็ดล้านเอ็ดบาทถ้วน`);
+    expect(BR.BT(`1000011000001`, true)).toBe(`หนึ่งล้านสิบเอ็ดล้านเอ็ดบาทถ้วน`);
+    expect(BR.BT(`101`)).toBe(`หนึ่งร้อยหนึ่งบาทถ้วน`);
+    expect(BR.BT(`101`, true)).toBe(`หนึ่งร้อยเอ็ดบาทถ้วน`);
     expect(BR.BT(`123`)).toBe(`หนึ่งร้อยยี่สิบสามบาทถ้วน`);
     expect(BR.BT(`8.00`)).toBe(`แปดบาทถ้วน`)
     expect(BR.BT(`5678.00`)).toBe(`ห้าพันหกร้อยเจ็ดสิบแปดบาทถ้วน`)
     expect(BR.BT(`63147.89`)).toBe(`หกหมื่นสามพันหนึ่งร้อยสี่สิบเจ็ดบาทแปดสิบเก้าสตางค์`)
+    expect(BR.BT(`51000001.00`, true)).toBe(`ห้าสิบเอ็ดล้านเอ็ดบาทถ้วน`)
     expect(BR.BT(`51000001.00`)).toBe(`ห้าสิบเอ็ดล้านหนึ่งบาทถ้วน`)
     expect(BR.BT(`317.10`)).toBe(`สามร้อยสิบเจ็ดบาทสิบสตางค์`)
     expect(BR.BT(`422.26`)).toBe(`สี่ร้อยยี่สิบสองบาทยี่สิบหกสตางค์`)
@@ -26,6 +32,7 @@ test('BT', () => {
 
 test("ABT", () => {
   expect(BR.ABT(`lol`)).toBe(undefined);
+  expect(BR.ABT(37)).toBe(`สามสิบเจ็ดบาทถ้วน`);
   expect(BR.ABT(`2000000000000.00`)).toBe(`สองล้านล้านบาทถ้วน`);
   expect(BR.ABT(`123`)).toBe(`หนึ่งร้อยยี่สิบสามบาทถ้วน`);
   expect(BR.ABT(`8.00`)).toBe(`แปดบาทถ้วน`);
@@ -50,9 +57,15 @@ test("ABT", () => {
 
 test('PrintSatangs', () =>{
     expect(BR.PrintSatangs(`67`)).toBe(`หกสิบเจ็ดสตางค์`)
+    expect(BR.PrintSatangs(`37`)).toBe(`สามสิบเจ็ดสตางค์`)
+    expect(BR.PrintSatangs(`31`)).toBe(`สามสิบเอ็ดสตางค์`)
+    expect(BR.PrintSatangs(`21`)).toBe(`ยี่สิบเอ็ดสตางค์`)
     expect(BR.PrintSatangs(`01`)).toBe(`หนึ่งสตางค์`)
     expect(BR.PrintSatangs(`1`)).toBe(`สิบสตางค์`)
     expect(BR.PrintSatangs(``)).toBe(`ถ้วน`)
+    expect(BR.PrintSatangs(`0`)).toBe(`ถ้วน`)
+    expect(BR.PrintSatangs(`00`)).toBe(`ถ้วน`)
+    expect(BR.PrintSatangs(`0000`)).toBe(`ถ้วน`)
     expect(BR.PrintSatangs(`dd`)).toBe(undefined)
     expect(BR.PrintSatangs(`999`)).toBe(undefined);
 })
@@ -188,6 +201,7 @@ test('SatangNum', () => {
 })
 
 test(`TB`, () => {
+    expect(BR.TB(`สิบเอ็ดบาทสิบเอ็ดสตางค์`)).toBe(`11.11`);
     expect(BR.TB(`สามสิบสามแสนบาทถ้วน`)).toBe(`Invalid String`);
     expect(BR.TB(`สองล้านล้านบาทถ้วน`)).toBe(`2000000000000.00`);
     expect(BR.TB(`สองล้านล้านยี่สิบบาทถ้วน`)).toBe(`2000000000020.00`);
@@ -226,4 +240,7 @@ test('Reverse BahtText', () => {
 
 test('repeat',() => {
   expect(BR.repeat(`ค`,[3])).toBe(`คคค`);
+  expect(`ปิดสวิตซ์ ${BR.repeat(`ป`, [3])} ป่าหี่`).toBe(
+    `ปิดสวิตซ์ ปปป ป่าหี่`
+  );
 })

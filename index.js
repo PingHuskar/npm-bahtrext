@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-const VERSION = `1.1.8`
+const VERSION = `1.2.0`
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -102,9 +102,10 @@ const padWithLeadingZeros = (num, totalLength) => {
   return String(num).padStart(totalLength, "0");
 };
 
-const hundredThousandToOne = (digits) => {
+const hundredThousandToOne = (digits, ed = false) => {
   let word = ``;
   let c = 0;
+  if (DEBUG) console.log(`ed`,ed)
   const digitspadWithLeadingZeros = padWithLeadingZeros(digits, 6);
   for (let digit of digitspadWithLeadingZeros) {
     digit = parseInt(digit);
@@ -113,6 +114,8 @@ const hundredThousandToOne = (digits) => {
         word += `${SPECIALTWO}${TEN}`;
       } else if (c == 4 && digit == 1) {
         word += TEN;
+      } else if (c == 5 && digit == 1 && (ed)) {
+        word += SPECIALONE;
       } else if (c == 5 && digit == 1 && digitspadWithLeadingZeros[4] != 0) {
         word += SPECIALONE;
       } else {
@@ -124,20 +127,22 @@ const hundredThousandToOne = (digits) => {
   return word;
 };
 
-const LeandingEdToOne = (money) => money.replace(/^เอ็ด(?=(ล้าน)+)/, ONE);
+const LeadingSpecialOneToOne = (money) => money.replace(/^เอ็ด(?=(ล้าน)+)/, ONE);
 
-const PrintBaht = (money) => {
+const PrintBaht = (money, ed = false) => {
   if (!money) return ``;
   let newMoney = [];
   while (money != ``) {
     let selectedupto6digit = money.match(LAST6DIGITPATTERN)[0];
     newMoney.push(
-      `${hundredThousandToOne(selectedupto6digit)}${MILLION}`
+      `${hundredThousandToOne(selectedupto6digit, ed)}${MILLION}`
     );
     money = money.replace(LAST6DIGITPATTERN, "");
   }
-  const cleanLeadingEd = LeandingEdToOne(newMoney.reverse().join(""));
-  return `${cleanLeadingEd.replace(/ล้าน$/, ``)}${BAHT}`;
+  return `${LeadingSpecialOneToOne(newMoney.reverse().join("")).replace(
+    /ล้าน$/,
+    ``
+  )}${BAHT}`;
 };
 
 const SatangFirstDigit = (digit) => {
@@ -169,6 +174,7 @@ let THB = new Intl.NumberFormat("th-TH", {
 
 const BahtText = (
   money,
+  ed=false,
   currencyformat = THB,
   arrow = READAS,
   ClErr = MoneyInvalid,
@@ -186,11 +192,11 @@ const BahtText = (
     } ${arrow} "${THAINUMBERWORDS[0]}${BAHT}${FULLBAHT}"`;
   return `${
     currencyformat ? currencyformat.format(moneyFull) : moneyFull
-  } ${arrow} "${PrintBaht(moneyInt)}${PrintSatangs(moneyFrac)}"`;
+  } ${arrow} "${PrintBaht(moneyInt, ed)}${PrintSatangs(moneyFrac)}"`;
 };
 
-const BT = (money) => {
-  const rBahtText = BahtText(money);
+const BT = (money, ed = false) => {
+  const rBahtText = BahtText(money, ed);;
   if (!rBahtText) return undefined;
   return rBahtText.split('"').at(-2);
 };
@@ -208,7 +214,7 @@ const THAI2ARABICNumerals = [
   { th: `๙`, a: `9` },
 ];
 
-const BF = (flexmoney, InvalidType = `Invalid Type`) => {
+const BF = (flexmoney, ed = false, InvalidType = `Invalid Type`) => {
   if (!flexmoney) return undefined;
   if (typeof flexmoney !== "string") return InvalidType;
   let money = flexmoney;
@@ -220,7 +226,7 @@ const BF = (flexmoney, InvalidType = `Invalid Type`) => {
     );
   }
   if (DEBUG) console.log(money);
-  return BT(money);
+  return BT(money, ed);
 };
 
 const IsMatchInSkipsPattern = (match, skips) => {
@@ -236,7 +242,8 @@ const defaultBulkBahtTextSkips = [/\b5+\+?\b/];
 const BulkBahtText = (
   str,
   pat = defaultBulkBahtTextPat,
-  skips = defaultBulkBahtTextSkips
+  skips = defaultBulkBahtTextSkips,
+  ed = false
 ) => {
   if (typeof str !== "string") return `Invalid Type`;
   if (!str) return null;
@@ -244,7 +251,7 @@ const BulkBahtText = (
   if (!matches) return str;
   for (const match of matches) {
     if (IsMatchInSkipsPattern(match, skips)) continue;
-    str = str.replace(match, BahtText(match.replace(/[^\d]/g,'')).split('"').at(-2));
+    str = str.replace(match, BahtText(match.replace(/[^\d]/g,'')).split('"').at(-2), ed);
   }
   return str;
 };
@@ -376,7 +383,7 @@ const IsValidTB = (str) => {
   return str === BT(TB(str)).replace(FULLBAHT, "");
 };
 
-const ABT = (money) => {
+const ABT = (money, ed = false) => {
   if (!money) return undefined;
   switch (typeof money) {
     case "number":
@@ -387,7 +394,7 @@ const ABT = (money) => {
       const THBText = require("thai-baht-text");
       return THBText(money);
     case "string":
-      return BF(money);
+      return BF(money, ed);
     default:
       return undefined;
   }
@@ -493,8 +500,7 @@ const LNBT = (nameorpowerof10, d=`1`) => {
   }
 }
 
-if (!DEBUG) {
-
+// if (!DEBUG) {
   module.exports = {
     VERSION,
     SPECIALONE,
@@ -534,5 +540,6 @@ if (!DEBUG) {
     repeat,
     large_numbers,
     LNBT,
+    LeadingSpecialOneToOne,
   };
-}
+// }
