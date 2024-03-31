@@ -1,9 +1,10 @@
-# BahtRext
+# [BahtRext](https://pinghuskar.github.io/npm-bahtrext/)
 ![Download/month](https://img.shields.io/npm/dm/bahtrext.svg)
 ![Total Download](https://img.shields.io/npm/dt/bahtrext.svg)
 
-## Demo
+## Demo / Example
 - [Codepen](https://codepen.io/chadin-chaipornpisuth/full/rNbzyom)
+- [React] Coming Soon
 
 ## Must Read
 - **Checkout Test Cases in `index.test.js` Before Implement**
@@ -17,7 +18,7 @@
     - `MS Excel`
     - [`thai-baht-text`](https://www.npmjs.com/package/thai-baht-text)
     - [earthchie/BAHTTEXT.js](https://github.com/earthchie/BAHTTEXT.js)
-  - **Your Choice**
+  - `หนึ่งร้อยหนึ่งบาทถ้วน` หรือ `หนึ่งร้อยเอ็ดบาทถ้วน` ก็ได้ ให้เข้าใจได้ตรงกัน
     - [**`BahtRext`**](https://pinghuskar.github.io/npm-bahtrext/)
       - [Versions](https://www.npmjs.com/package/bahtrext?activeTab=versions)
       - [REPO](https://github.com/PingHuskar/npm-bahtrext)
