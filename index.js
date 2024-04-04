@@ -1,6 +1,7 @@
 const DEBUG = false;
 
-const VERSION = `1.2.0`
+const GoogleSheetsCellCharactersLimit = 50000
+const VERSION = `1.2.1`
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -198,7 +199,12 @@ const BahtText = (
 const BT = (money, ed = false) => {
   const rBahtText = BahtText(money, ed);;
   if (!rBahtText) return undefined;
-  return rBahtText.split('"').at(-2);
+  const retText = rBahtText.split('"').at(-2);
+  if (!retText) return undefined;
+  if (retText.length > GoogleSheetsCellCharactersLimit) {
+    console.warn(`return string Exceed Google Sheets Cell Limit (${GoogleSheetsCellCharactersLimit})`);
+  }
+  return retText;
 };
 
 const THAI2ARABICNumerals = [
@@ -257,7 +263,7 @@ const BulkBahtText = (
 };
 
 const ValidSATANGRegex =
-  /((ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?(สิบ))?(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?สตางค์|(หนึ่งสตางค์)|(ถ้วน)/gs;
+  /((ยี่|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?(สิบ)(เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?)สตางค์|(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ)สตางค์|(ถ้วน)/gs;
 
 const NumText = (str, arr = THAINUMBERWORDS, flag = `g`) => {
   if (!str) return undefined;

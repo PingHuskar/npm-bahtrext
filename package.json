@@ -1,6 +1,6 @@
 {
   "name": "bahtrext",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Better BahtText",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
   },
   "author": "Chadin Chaipornpisuth",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PingHuskar/npm-bahtrext.git"
+  },
   "keywords": [
     "Thai",
     "BahtText",
@@ -17,7 +21,8 @@
   "devDependencies": {
     "bahttext": "^2.3.0",
     "jest": "^29.7.0",
-    "numbaht": "^0.1.1"
+    "numbaht": "^0.1.1",
+    "operation-strint": "^1.0.3"
   },
   "dependencies": {
     "thai-baht-text": "^1.0.8"

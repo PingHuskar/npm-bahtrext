@@ -31,7 +31,8 @@
 5. This Number System not working well with large numbers.
 
 ## Fixes
-- 1.2.0 - `เอ็ด`
+- 1.2.1 - GoogleSheetsCellCharactersLimit
+- 1.2.0 - Dynamic `เอ็ด`
 - 1.1.7 - remove `Googolplex`
 - 1.1.3 - add LNBT
 - 1.1.1 
@@ -44,7 +45,7 @@
 - 1.0.6 - BT is main function
 
 ## Test Regex
-- [ValidSATANGRegex](https://regex101.com/r/yVvsFN/1)
+- [ValidSATANGRegex](https://regex101.com/r/yVvsFN/3)
 
 ## 😊 Plz Consider
 - [Give A Star](https://github.com/PingHuskar/npm-bahtrext)
