@@ -506,6 +506,15 @@ const LNBT = (nameorpowerof10, d=`1`) => {
   }
 }
 
+const OB = (money) => {
+  return {
+    val: money,
+    typ: typeof money,
+    err: typeof(ABT(money)) === "undefined",
+    txt: ABT(money),
+  };
+}
+
 // if (!DEBUG) {
   module.exports = {
     VERSION,
@@ -547,5 +556,6 @@ const LNBT = (nameorpowerof10, d=`1`) => {
     large_numbers,
     LNBT,
     LeadingSpecialOneToOne,
+    OB,
   };
 // }
