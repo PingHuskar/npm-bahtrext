@@ -283,3 +283,21 @@ test(`OB`, () => {
     val: "s6d7f6d7f6",
   });
 })
+
+test(`IsValidText`, () => {
+  expect(BR.IsValidText("สามแสนสองหมื่นห้าสิบเอ็ดล้านสองหมื่นสิบล้านสองสิบล้านหนึ่ง")).toBe(false);
+  expect(BR.IsValidText("สามแสนสองหมื่นห้าสิบเอ็ดล้านสองหมื่นสิบล้านยี่สิบล้านหนึ่ง")).toBe(true);
+  expect(BR.IsValidText("สามแสนสองหมื่นห้าสิบเอ็ดล้านสองหมื่นสิบล้านยี่สิบล้านหนึ่งล้าน")).toBe(true);
+  expect(BR.IsValidText("สามแสนสองหมื่นห้าสิบเอ็ด@ล้านสองหมื่นสิบล้านยี่สิบล้านหนึ่งล้าน")).toBe(false);
+  expect(BR.IsValidText("สองล้าน")).toBe(true);
+  expect(BR.IsValidText("ล้าน")).toBe(false);
+  expect(BR.IsValidText("ล้านล้าน")).toBe(false);
+  expect(BR.IsValidText("ล้านล้านล้าน")).toBe(false);
+  expect(BR.IsValidText("asdf")).toBe(false);
+  expect(BR.IsValidText("123")).toBe(false);
+  expect(BR.IsValidText("")).toBe(false);
+  expect(BR.IsValidText(undefined)).toBe(false);
+  expect(BR.IsValidText(null)).toBe(false);
+  expect(BR.IsValidText(0)).toBe(false);
+  expect(BR.IsValidText(123)).toBe(false);
+});

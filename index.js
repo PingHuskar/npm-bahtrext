@@ -38,6 +38,17 @@ const THAINUMBERWORDS = [
   NINE,
   TEN,
 ];
+const ONETONINE = [
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+];
 const LTHAISATANGWORDS = [
   ``,
   SPECIALONE,
@@ -294,6 +305,72 @@ const SatangNum = (moneySatang) => {
   return undefined;
 };
 
+const IsValidText = (text) => {
+  if (typeof(text) !== `string`) return false
+  if (text.replace(/ล้าน/g,"") === "") return false
+  const sixdigitswords = text.split(MILLION);
+  for (const sixdigitsword of sixdigitswords) {
+    if (/สองสิบ/.test(sixdigitsword)) return false;
+    if (/สิบหนึ่ง/.test(sixdigitsword)) return false;
+    for (const REVERSETHAIDIGITWORD of REVERSETHAIDIGITWORDS.slice(0, -1)) {
+      if (
+        (sixdigitsword.match(new RegExp(REVERSETHAIDIGITWORD, "g"))?.length ||
+          0) > 1
+      )
+        return false;
+    }
+    const iHUNDREDTHOUSAND = sixdigitsword.indexOf(HUNDREDTHOUSAND);
+    const iTENTHOUSAND = sixdigitsword.indexOf(TENTHOUSAND);
+    const iTHOUSAND = sixdigitsword.indexOf(THOUSAND);
+    const iHUNDRED = sixdigitsword.indexOf(HUNDRED);
+    const iTEN = sixdigitsword.indexOf(TEN);
+    const iiTEN = iTEN == -1 ? 0 : iTEN;
+    const iiHUNDRED = iHUNDRED == -1 ? 0 : iHUNDRED;
+    const iiTHOUSAND = iTHOUSAND == -1 ? 0 : iTHOUSAND;
+    const iiTENTHOUSAND = iTENTHOUSAND == -1 ? 0 : iTENTHOUSAND;
+    const iiHUNDREDTHOUSAND = iHUNDREDTHOUSAND == -1 ? 0 : iHUNDREDTHOUSAND;
+    if (
+      !(
+        ((iiTEN >= iiHUNDRED &&
+          iiTEN >= iiTHOUSAND &&
+          iiTEN >= iiTENTHOUSAND &&
+          iiTEN >= iiHUNDREDTHOUSAND) ||
+          iiTEN == 0) &&
+        ((iiHUNDRED >= iiTHOUSAND &&
+          iiHUNDRED >= iiTENTHOUSAND &&
+          iiHUNDRED >= iiHUNDREDTHOUSAND) ||
+          iiHUNDRED == 0) &&
+        ((iiTHOUSAND >= iiTENTHOUSAND && iiTHOUSAND >= iiHUNDREDTHOUSAND) ||
+          iiTHOUSAND == 0) &&
+        (iiTENTHOUSAND >= iiHUNDREDTHOUSAND || iiTENTHOUSAND == 0)
+      )
+    ) {
+      return false;
+    }
+    let eachdigits = sixdigitsword.split(/แสน|หมื่น|พัน|ร้อย|สิบ/);
+    for (let i = 0; i < eachdigits.length; i++) {
+      if (eachdigits.at(i) === "") continue;
+      if (ONETONINE.indexOf(eachdigits.at(i)) === -1) {
+        if (eachdigits.at(i) === SPECIALONE) {
+          if (sixdigitsword.indexOf(`สิบเอ็ด`) === -1) {
+            console.log(`line 20`);
+            return false;
+          }
+          continue;
+        } else if (eachdigits.at(i) === SPECIALTWO) {
+          if (sixdigitsword.indexOf(`ยี่สิบ`) === -1) {
+            return false;
+          }
+          continue;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+};
+
 const TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;
   if (/บาท$/.test(BT)) BT = `${BT}${FULLBAHT}`
@@ -307,48 +384,12 @@ const TB = (BT, error = `Invalid String`) => {
   if (!retSatang) return error;
   const moneyBahts = [];
   const millions = moneyBaht.split(MILLION).reverse();
+  if (!IsValidText(moneyBaht)) return error;
   for (const million of millions) {
-    if (/สองสิบ/.test(million)) return error
-    if (/สิบหนึ่ง/.test(million)) return error
     if (SatangNum(million)) {
       moneyBahts.push(padWithLeadingZeros(SatangNum(million), 6));
       continue;
     }
-    const iHUNDREDTHOUSAND = million.indexOf(HUNDREDTHOUSAND);
-    const iTENTHOUSAND = million.indexOf(TENTHOUSAND);
-    const iTHOUSAND = million.indexOf(THOUSAND);
-    const iHUNDRED = million.indexOf(HUNDRED);
-    const iTEN = million.indexOf(TEN);
-    const iiTEN = iTEN == -1 ? 0 : iTEN;
-    const iiHUNDRED = iHUNDRED == -1 ? 0 : iHUNDRED;
-    const iiTHOUSAND = iTHOUSAND == -1 ? 0 : iTHOUSAND;
-    const iiTENTHOUSAND = iTENTHOUSAND == -1 ? 0 : iTENTHOUSAND;
-    const iiHUNDREDTHOUSAND = iHUNDREDTHOUSAND == -1 ? 0 : iHUNDREDTHOUSAND;
-    if (DEBUG) {
-      console.log(iiTEN);
-      console.log(iiHUNDRED);
-      console.log(iiTHOUSAND);
-      console.log(iiTENTHOUSAND);
-      console.log(iiHUNDREDTHOUSAND);
-    }
-    if (
-      !(
-        ((iiTEN >= iiHUNDRED &&
-          iiTEN >= iiTHOUSAND &&
-          iiTEN >= iiTENTHOUSAND &&
-          iiTEN >= iiHUNDREDTHOUSAND) ||
-          iiTEN == 0) &&
-        ((iiHUNDRED >= iiTHOUSAND &&
-          iiHUNDRED >= iiTENTHOUSAND &&
-          iiHUNDRED >= iiHUNDREDTHOUSAND) ||
-          iiHUNDRED == 0) &&
-          ((iiTHOUSAND >= iiTENTHOUSAND && 
-            iiTHOUSAND >= iiHUNDREDTHOUSAND) ||
-            iiTHOUSAND == 0) &&
-        (iiTENTHOUSAND >= iiHUNDREDTHOUSAND || iiTENTHOUSAND == 0)
-      )
-    )
-      return error;
     const THUNDREDTHOUSAND =
       /(หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า)?แสน/.exec(million)?.at(1) ||
       ZERO;
@@ -557,5 +598,13 @@ const OB = (money) => {
     LNBT,
     LeadingSpecialOneToOne,
     OB,
+    ONETONINE,
+    million: MILLION,
+    HUNDREDTHOUSAND,
+    TENTHOUSAND,
+    THOUSAND,
+    HUNDRED,
+    TEN,
+    IsValidText,
   };
 // }
