@@ -301,3 +301,10 @@ test(`IsValidText`, () => {
   expect(BR.IsValidText(0)).toBe(false);
   expect(BR.IsValidText(123)).toBe(false);
 });
+
+
+test(`IsValidText`, () => {
+  expect(true).toBe(true)
+  expect(false).toBe(!true)
+  expect(false).toBe(true)
+})
