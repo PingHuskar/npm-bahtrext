@@ -4,24 +4,24 @@
 
 ## Demo / Example
 - [Codepen](https://codepen.io/chadin-chaipornpisuth/full/rNbzyom)
-- [React] Coming Soon
+- [React](https://timely-fenglisu-b68fd6.netlify.app/)
 
 ## Must Read
 - **Checkout Test Cases in `index.test.js` Before Implement**
 - **`101`** ควรจะถูกอ่านอย่างไร ?
   - `หนึ่งร้อยหนึ่งบาทถ้วน`
-    - `Google Sheets`
+    - [`Google Sheets`](https://sheets.google.com/)
     - `สัญญากู้เงินของธนาคาร`* ลองมากู้ได้เลยครับ ถ้าไม่ใช่บอกผมด้วย
     - [jojoee/bahttext](https://www.npmjs.com/package/bahttext)
     - จะอ่านว่า`เอ็ด`เมื่อหลักสิบมีค่า เช่น `สิบเอ็ด`, `ยี่สิบเอ็ด`
   - `หนึ่งร้อยเอ็ดบาทถ้วน`
-    - `MS Excel`
+    - [`MS Excel`](https://www.microsoft.com/th-th/microsoft-365/excel)
     - [`thai-baht-text`](https://www.npmjs.com/package/thai-baht-text)
     - [earthchie/BAHTTEXT.js](https://github.com/earthchie/BAHTTEXT.js)
   - `หนึ่งร้อยหนึ่งบาทถ้วน` หรือ `หนึ่งร้อยเอ็ดบาทถ้วน` ก็ได้ ให้เข้าใจได้ตรงกัน
     - [**`BahtRext`**](https://pinghuskar.github.io/npm-bahtrext/)
-      - [Versions](https://www.npmjs.com/package/bahtrext?activeTab=versions)
-      - [REPO](https://github.com/PingHuskar/npm-bahtrext)
+      - [Active Versions](https://www.npmjs.com/package/bahtrext?activeTab=versions)
+      - [GitHub Repo](https://github.com/PingHuskar/npm-bahtrext)
 
 ## Beliefs
 1. Money in Thai Baht can be translate to word

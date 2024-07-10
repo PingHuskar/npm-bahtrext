@@ -302,9 +302,9 @@ test(`IsValidText`, () => {
   expect(BR.IsValidText(123)).toBe(false);
 });
 
-
-test(`IsValidText`, () => {
+test(`Bool Test`, () => {
   expect(true).toBe(true)
+  expect(true).toBe(!false)
+  expect(false).toBe(false);
   expect(false).toBe(!true)
-  expect(false).toBe(true)
 })
