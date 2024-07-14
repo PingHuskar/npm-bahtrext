@@ -352,15 +352,14 @@ const IsValidText = (text) => {
       if (eachdigits.at(i) === "") continue;
       if (ONETONINE.indexOf(eachdigits.at(i)) === -1) {
         if (eachdigits.at(i) === SPECIALONE) {
-          if (sixdigitsword.indexOf(`สิบเอ็ด`) === -1) {
-            console.log(`line 20`);
-            return false;
-          }
+          // if (sixdigitsword.indexOf(`สิบเอ็ด`) === -1) {
+          //   return false;
+          // }
           continue;
         } else if (eachdigits.at(i) === SPECIALTWO) {
-          if (sixdigitsword.indexOf(`ยี่สิบ`) === -1) {
-            return false;
-          }
+          // if (sixdigitsword.indexOf(`ยี่สิบ`) === -1) {
+          //   return false;
+          // }
           continue;
         } else {
           return false;
@@ -427,7 +426,8 @@ const TB = (BT, error = `Invalid String`) => {
 };
 
 const IsValidTB = (str) => {
-  return str === BT(TB(str)).replace(FULLBAHT, "");
+  const BTTB = BT(TB(str)).replace(/\s/g, "");
+  return str === BTTB.replace(FULLBAHT, "");
 };
 
 const ABT = (money, ed = false) => {
@@ -531,7 +531,7 @@ const LNBT = (nameorpowerof10, d=`1`) => {
     case `string`:
       try {
         if (nameorpowerof10 == `Googolplex`) {
-          return `No Don't Try This`
+          return `Don't Try This`
         }
         const v = large_numbers.find(n => n.name === nameorpowerof10).powof10
         if (v < 0) return undefined

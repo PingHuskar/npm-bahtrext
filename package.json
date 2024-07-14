@@ -4,7 +4,8 @@
   "description": "Better BahtText",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "cv": "jest --coverage"
   },
   "author": "Chadin Chaipornpisuth",
   "license": "ISC",

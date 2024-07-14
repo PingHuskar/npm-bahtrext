@@ -57,6 +57,12 @@ test("ABT", () => {
   expect(BR.ABT(`768,601,800,000,000`)).toBe(
     `เจ็ดร้อยหกสิบแปดล้านหกแสนหนึ่งพันแปดร้อยล้านบาทถ้วน`
   );
+  expect(BR.ABT([123])).toBe(
+    undefined
+  )
+  expect(BR.ABT(9007199254740992)).toBe(
+    `เก้าพันเจ็ดล้านหนึ่งแสนเก้าหมื่นเก้าพันสองร้อยห้าสิบสี่ล้านเจ็ดแสนสี่หมื่นเก้าร้อยเก้าสิบสองบาทถ้วน`
+  );
 });
 
 test('PrintSatangs', () =>{
@@ -300,6 +306,9 @@ test(`IsValidText`, () => {
   expect(BR.IsValidText(null)).toBe(false);
   expect(BR.IsValidText(0)).toBe(false);
   expect(BR.IsValidText(123)).toBe(false);
+  expect(BR.IsValidText(`แสนแสน`)).toBe(false);
+  expect(BR.IsValidText(`ยี่สิบ`)).toBe(true);
+  expect(BR.IsValidText(`สองสิบ`)).toBe(false);
 });
 
 test(`Bool Test`, () => {
@@ -308,3 +317,15 @@ test(`Bool Test`, () => {
   expect(false).toBe(false);
   expect(false).toBe(!true)
 })
+
+test(`IsValidTB`, () => {
+    expect(BR.IsValidTB(`แปดสิบแปดบาท`)).toBe(true);
+});
+
+test(`LNBT`, () => {
+    expect(BR.LNBT(`Googolplex`)).toBe(`Don't Try This`);
+    expect(BR.LNBT(`Septillion`)).toBe(`หนึ่งล้านล้านล้านล้านบาทถ้วน`);
+    expect(BR.LNBT(`JumNumKaoEpu`)).toBe(undefined);
+    expect(BR.LNBT(1, 0)).toBe(`ศูนย์บาทถ้วน`);
+    expect(BR.LNBT([`asdf`])).toBe(undefined);
+});
