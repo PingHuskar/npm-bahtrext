@@ -14,6 +14,14 @@ const {
   SPLITPATTERN,
   ZERO,
   ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
   THAINUMBERWORDS,
   ONETONINE,
   LTHAISATANGWORDS,
@@ -408,6 +416,22 @@ const OB = (money) => {
   };
 }
 
+const SEP = (num, separator = `-`) => {
+  let ret = BF(num, true)
+  for (let i of ONETONINE) {
+    ret = ret.replace(new RegExp(i, `g`), `${i}${separator}`);
+  }
+  for (let i of REVERSETHAIDIGITWORDS.filter(x => x !== ``)) {
+    ret = ret.replace(new RegExp(i, `g`), `${i}${separator}`);
+  }
+  ret = ret.replace(new RegExp(MILLION, `g`), `${MILLION}${separator}`)
+            .replace(new RegExp(SPECIALONE, `g`), `${SPECIALONE}${separator}`)
+            .replace(new RegExp(SPECIALTWO, `g`), `${SPECIALTWO}${separator}`)
+            .replace("บาทถ้วน", "")
+            .replace(new RegExp(`${separator}$`),``);
+  return ret
+}
+
 // if (!DEBUG) {
   module.exports = {
     VERSION,
@@ -458,5 +482,6 @@ const OB = (money) => {
     HUNDRED,
     TEN,
     IsValidText,
+    SEP,
   };
 // }

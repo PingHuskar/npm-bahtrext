@@ -31,6 +31,7 @@
 5. This Number System not working well with large numbers.
 
 ## Fixes
+- 1.3.3 - Update Version Thai Baht Text JS + add SEP
 - 1.2.1 - GoogleSheetsCellCharactersLimit
 - 1.2.0 - Dynamic `เอ็ด`
 - 1.1.7 - remove `Googolplex`

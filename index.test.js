@@ -329,3 +329,14 @@ test(`LNBT`, () => {
     expect(BR.LNBT(1, 0)).toBe(`ศูนย์บาทถ้วน`);
     expect(BR.LNBT([`asdf`])).toBe(undefined);
 });
+
+test(`sep`, () => {
+  expect(BR.SEP(`11`, `;;;`)).toBe(`สิบ;;;เอ็ด`);
+  expect(BR.SEP(`11`)).toBe(`สิบ-เอ็ด`)
+  expect(BR.SEP(`21`)).toBe(`ยี่-สิบ-เอ็ด`)
+  expect(BR.SEP(`101`)).toBe(`หนึ่ง-ร้อย-เอ็ด`);
+  expect(BR.SEP(`1001`)).toBe(`หนึ่ง-พัน-เอ็ด`);
+  expect(BR.SEP(`2501`)).toBe(`สอง-พัน-ห้า-ร้อย-เอ็ด`);
+  expect(BR.SEP(`501741221`)).toBe(`ห้า-ร้อย-เอ็ด-ล้าน-เจ็ด-แสน-สี่-หมื่น-หนึ่ง-พัน-สอง-ร้อย-ยี่-สิบ-เอ็ด`);
+  // https://web.facebook.com/kumthai.th/posts/920804870082544
+})
