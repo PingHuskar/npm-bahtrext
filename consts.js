@@ -172,6 +172,9 @@ const large_numbers = [
   { name: "Googol", powof10: 100 },
 ];
 
+const octalRegex1 = /^0o?[0-7]+$/i;
+const octalRegex2 = /^0+[0-7]+$/i;
+
 module.exports = {
   DEBUG,
   GoogleSheetsCellCharactersLimit,
@@ -213,4 +216,6 @@ module.exports = {
   ElevenToNineteenRegex,
   TwentyToNinetyNine,
   large_numbers,
+  octalRegex1,
+  octalRegex2,
 };

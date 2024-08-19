@@ -14,14 +14,8 @@ const {
   SPLITPATTERN,
   ZERO,
   ONE,
-  TWO,
-  THREE,
-  FOUR,
-  FIVE,
-  SIX,
-  SEVEN,
-  EIGHT,
-  NINE,
+  octalRegex1,
+  octalRegex2,
   THAINUMBERWORDS,
   ONETONINE,
   LTHAISATANGWORDS,
@@ -40,6 +34,7 @@ const {
   TwentyToNinetyNine,
   large_numbers,
 } = require("./consts.js");
+const { isOctal, toDec } = require("./octal.js");
 
 const MoneyInvalid = (money) =>
   `Your Input is Invalid Format!\nThis is Your Input : ${money}\nTry Again`;
@@ -162,7 +157,12 @@ const BahtText = (
   } ${arrow} "${PrintBaht(moneyInt, ed)}${PrintSatangs(moneyFrac)}"`;
 };
 
-const BT = (money, ed = false) => {
+const BT = (money, ed = false, OL = false) => {
+  const isOL = OL && isOctal(money);
+  if (isOL) {
+    money = toDec(money)
+  }
+
   const rBahtText = BahtText(money, ed);;
   if (!rBahtText) return undefined;
   const retText = rBahtText.split('"').at(-2);
@@ -173,7 +173,7 @@ const BT = (money, ed = false) => {
   return retText;
 };
 
-const BF = (flexmoney, ed = false, InvalidType = `Invalid Type`) => {
+const BF = (flexmoney, ed = false, InvalidType = `Invalid Type`, OL = false) => {
   if (!flexmoney) return undefined;
   if (typeof flexmoney !== "string") return InvalidType;
   let money = flexmoney;
@@ -185,7 +185,7 @@ const BF = (flexmoney, ed = false, InvalidType = `Invalid Type`) => {
     );
   }
   if (DEBUG) console.log(money);
-  return BT(money, ed);
+  return BT(money, ed, OL);
 };
 
 const IsMatchInSkipsPattern = (match, skips) => {
@@ -417,18 +417,20 @@ const OB = (money) => {
 }
 
 const SEP = (num, separator = `-`) => {
-  let ret = BF(num, true)
+  let ret = ABT(num, true);
   for (let i of ONETONINE) {
     ret = ret.replace(new RegExp(i, `g`), `${i}${separator}`);
   }
   for (let i of REVERSETHAIDIGITWORDS.filter(x => x !== ``)) {
     ret = ret.replace(new RegExp(i, `g`), `${i}${separator}`);
   }
-  ret = ret.replace(new RegExp(MILLION, `g`), `${MILLION}${separator}`)
-            .replace(new RegExp(SPECIALONE, `g`), `${SPECIALONE}${separator}`)
-            .replace(new RegExp(SPECIALTWO, `g`), `${SPECIALTWO}${separator}`)
-            .replace("บาทถ้วน", "")
-            .replace(new RegExp(`${separator}$`),``);
+  ret = ret
+        .replace(new RegExp(MILLION, `g`), `${MILLION}${separator}`)
+        .replace(new RegExp(SPECIALONE, `g`), `${SPECIALONE}${separator}`)
+        .replace(new RegExp(SPECIALTWO, `g`), `${SPECIALTWO}${separator}`)
+        .replace(`${BAHT}${FULLBAHT}`, "")
+        .replace(BAHT, `${BAHT}${separator}`)
+        .replace(new RegExp(`${separator}$`), ``);
   return ret
 }
 
