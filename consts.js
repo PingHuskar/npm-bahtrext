@@ -1,7 +1,7 @@
 const DEBUG = false;
 
 const GoogleSheetsCellCharactersLimit = 50000;
-const VERSION = `1.2.1`;
+const VERSION = `1.4.1`;
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -172,8 +172,15 @@ const large_numbers = [
   { name: "Googol", powof10: 100 },
 ];
 
+const MAX_SAFE_INTEGER = 9007199254740991;
+
 const octalRegex1 = /^0o?[0-7]+$/i;
 const octalRegex2 = /^0+[0-7]+$/i;
+
+let THB = new Intl.NumberFormat("th-TH", {
+  style: "currency",
+  currency: "THB",
+});
 
 module.exports = {
   DEBUG,
@@ -218,4 +225,6 @@ module.exports = {
   large_numbers,
   octalRegex1,
   octalRegex2,
+  MAX_SAFE_INTEGER,
+  THB,
 };

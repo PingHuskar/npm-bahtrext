@@ -1,7 +1,7 @@
 {
   "name": "bahtrext",
-  "version": "1.4.0",
-  "description": "Better BahtText",
+  "version": "1.4.1",
+  "description": "BahtText Stringify",
   "main": "index.js",
   "scripts": {
     "test": "jest",

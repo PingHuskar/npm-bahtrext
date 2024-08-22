@@ -14,8 +14,6 @@ const {
   SPLITPATTERN,
   ZERO,
   ONE,
-  octalRegex1,
-  octalRegex2,
   THAINUMBERWORDS,
   ONETONINE,
   LTHAISATANGWORDS,
@@ -33,8 +31,11 @@ const {
   ElevenToNineteenRegex,
   TwentyToNinetyNine,
   large_numbers,
+  MAX_SAFE_INTEGER,
+  THB,
 } = require("./consts.js");
 const { isOctal, toDec } = require("./octal.js");
+const op = require(`operation-strint`)
 
 const MoneyInvalid = (money) =>
   `Your Input is Invalid Format!\nThis is Your Input : ${money}\nTry Again`;
@@ -49,9 +50,12 @@ const MoneyLaundering = (money) => {
   );
   return removeCommaAndUnderScoreAndLeadingingZeros;
 };
-const IsMoneyValidate = (money) => SPLITPATTERN.test(money);
+const IsMoneyValidate = (money, rounding) => {
+  if (rounding === ``) return SPLITPATTERN.test(money);
+  return /\d*(\.\d+)?/.test(money);
+};
 const splitIntFrac = (money) => {
-  const match = money.match(SPLITPATTERN);
+  const match = money.match(/(\d*)(\.\d+)?/);
   let [moneyFull, moneyInt, moneyFrac] = match;
   moneyFrac === undefined
     ? (moneyFrac = "")
@@ -120,50 +124,70 @@ const SatangSecondDigit = (digit) => {
   return `${THAINUMBERWORDS[parseInt(digit[1])]}`;
 };
 
-const PrintSatangs = (satangs) => {
-  if (satangs.match(/^0*$/)) return FULLBAHT;
-  if (!(/^\d{0,2}$/.test(satangs))) return undefined;
+const PrintSatangs = (satangs, rounding=``) => {
+  if (satangs.match(/^0*$/)) return [FULLBAHT, `0`];
+  if ((!/^\d{0,2}$/.test(satangs) && rounding === ``) || /[^\d]/.test(satangs)) return [undefined, `0`];
+  let first2digit = satangs.slice(0, 2);
+  let ceiling = false
+  if (rounding === `c`) {
+    const therest = satangs.slice(2, satangs.length);
+    if (therest.match(/^\d*[1-9]+/) && therest.match(/^\d*$/)) ceiling = true
+    if (ceiling) {
+      first2digit = op.sum(`1`, first2digit);
+    }
+    satangs = first2digit;
+  }
+  if (satangs === `100`) return [FULLBAHT, `1`]
   let satangword = `${SatangFirstDigit(satangs[0])}${SatangSecondDigit(
     satangs
   )}${SATANG}`;
-  return satangword;
+  return [satangword, `0`];
 };
-
-let THB = new Intl.NumberFormat("th-TH", {
-  style: "currency",
-  currency: "THB",
-});
 
 const BahtText = (
   money,
-  ed=false,
+  ed = false,
   currencyformat = THB,
   arrow = READAS,
   ClErr = MoneyInvalid,
   InvalidType = `"Invalid Type"`,
-  NoInput = null
+  NoInput = null,
+  rounding = ``
 ) => {
   if (!money) return NoInput;
   if (typeof money !== "string") return InvalidType;
   const cleanedMoney = MoneyLaundering(money);
-  if (!IsMoneyValidate(cleanedMoney) || money === `.`) return ClErr(money);
+  if (!IsMoneyValidate(cleanedMoney, rounding) || money === `.`) return ClErr(money);
   const [moneyFull, moneyInt, moneyFrac] = splitIntFrac(cleanedMoney);
   if (moneyFull.match(/^(0*)(\.0*)?$/))
     return `${
       currencyformat ? currencyformat.format(moneyFull) : moneyFull
     } ${arrow} "${THAINUMBERWORDS[0]}${BAHT}${FULLBAHT}"`;
+  const satang_part = PrintSatangs(moneyFrac, rounding);
+  const opsum = op.sum(satang_part[1], moneyInt === `` ? `0` : moneyInt);
+  const new_baht = opsum === `` ? `0` : opsum;
+
+  const baht_part = PrintBaht(new_baht, ed).replace(/^บาท$/, ``);
   return `${
     currencyformat ? currencyformat.format(moneyFull) : moneyFull
-  } ${arrow} "${PrintBaht(moneyInt, ed)}${PrintSatangs(moneyFrac)}"`;
+  } ${arrow} "${baht_part}${satang_part[0]}"`;
 };
 
-const BT = (money, ed = false, OL = false) => {
+const BT = (money, ed = false, OL = false, rounding = ``) => {
   const isOL = OL && isOctal(money);
   if (isOL) {
     money = toDec(money)
   }
-
-  const rBahtText = BahtText(money, ed);;
+  const rBahtText = BahtText(
+    money,
+    ed,
+    THB,
+    READAS,
+    MoneyInvalid,
+    `"Invalid Type"`,
+    null,
+    rounding
+  );
   if (!rBahtText) return undefined;
   const retText = rBahtText.split('"').at(-2);
   if (!retText) return undefined;
@@ -365,7 +389,6 @@ const ABT = (money, ed = false) => {
   if (!money) return undefined;
   switch (typeof money) {
     case "number":
-      const MAX_SAFE_INTEGER = 9007199254740991
       if (money > MAX_SAFE_INTEGER) {
         console.warn(`Consider use BahtRext`);
       }
@@ -434,56 +457,54 @@ const SEP = (num, separator = `-`) => {
   return ret
 }
 
-// if (!DEBUG) {
-  module.exports = {
-    VERSION,
-    SPECIALONE,
-    SPECIALTWO,
-    TEN,
-    BAHT,
-    SATANG,
-    FULLBAHT,
-    MILLION,
-    LAST6DIGITPATTERN,
-    SPLITPATTERN,
-    REVERSETHAIDIGITWORDS,
-    THAINUMBERWORDS,
-    FTHAISATANGWORDS,
-    LTHAISATANGWORDS,
-    MoneyLaundering,
-    removeLeadingingZeros,
-    IsMoneyValidate,
-    splitIntFrac,
-    PrintBaht,
-    PrintSatangs,
-    THB,
-    BahtText,
-    BT,
-    BulkBahtText,
-    ValidSATANGRegex,
-    OneToTenTextRegex,
-    ElevenToNineteenRegex,
-    TwentyToNinetyNine,
-    NumText,
-    SatangNum,
-    TB,
-    IsValidTB,
-    THAI2ARABICNumerals,
-    BF,
-    ABT,
-    repeat,
-    large_numbers,
-    LNBT,
-    LeadingSpecialOneToOne,
-    OB,
-    ONETONINE,
-    million: MILLION,
-    HUNDREDTHOUSAND,
-    TENTHOUSAND,
-    THOUSAND,
-    HUNDRED,
-    TEN,
-    IsValidText,
-    SEP,
-  };
-// }
+module.exports = {
+  VERSION,
+  SPECIALONE,
+  SPECIALTWO,
+  TEN,
+  BAHT,
+  SATANG,
+  FULLBAHT,
+  MILLION,
+  LAST6DIGITPATTERN,
+  SPLITPATTERN,
+  REVERSETHAIDIGITWORDS,
+  THAINUMBERWORDS,
+  FTHAISATANGWORDS,
+  LTHAISATANGWORDS,
+  MoneyLaundering,
+  removeLeadingingZeros,
+  IsMoneyValidate,
+  splitIntFrac,
+  PrintBaht,
+  PrintSatangs,
+  THB,
+  BahtText,
+  BT,
+  BulkBahtText,
+  ValidSATANGRegex,
+  OneToTenTextRegex,
+  ElevenToNineteenRegex,
+  TwentyToNinetyNine,
+  NumText,
+  SatangNum,
+  TB,
+  IsValidTB,
+  THAI2ARABICNumerals,
+  BF,
+  ABT,
+  repeat,
+  large_numbers,
+  LNBT,
+  LeadingSpecialOneToOne,
+  OB,
+  ONETONINE,
+  million: MILLION,
+  HUNDREDTHOUSAND,
+  TENTHOUSAND,
+  THOUSAND,
+  HUNDRED,
+  TEN,
+  IsValidText,
+  SEP,
+};

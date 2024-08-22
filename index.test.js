@@ -24,6 +24,9 @@ test('NumText', () => {
     expect(NumText(84000)).toBe(`Invalid Type`);
 });
 
+test(`BT CEIL`,() => {
+  expect(BT(`4.990001`, false, false, `c`)).toBe(`ห้าบาทถ้วน`);
+})
 
 test('BT OL', () => {
   expect(BT(`077`)).toBe(`เจ็ดสิบเจ็ดบาทถ้วน`);
@@ -35,6 +38,10 @@ test('BT OL', () => {
 
 test('BT', () => {
     expect(BT(`lol`)).toBe(undefined);
+    expect(BT(`2000000000000.9`,false,false,`c`)).toBe(`สองล้านล้านบาทเก้าสิบสตางค์`)
+    expect(BT(`2000000000000.990003`,false,false,`c`)).toBe(`สองล้านล้านหนึ่งบาทถ้วน`)
+    expect(BT(`2000000000000.99`,false,false,`f`)).toBe(`สองล้านล้านบาทเก้าสิบเก้าสตางค์`);
+    expect(BT(`2000000000000.990003`,false,false,`f`)).toBe(`สองล้านล้านบาทเก้าสิบเก้าสตางค์`);
     expect(BT(`2000000000000.00`)).toBe(`สองล้านล้านบาทถ้วน`)
     expect(BT(`1000001000001`)).toBe(`หนึ่งล้านหนึ่งล้านหนึ่งบาทถ้วน`);
     expect(BT(`1000001000001`, true)).toBe(`หนึ่งล้านเอ็ดล้านเอ็ดบาทถ้วน`);
@@ -93,19 +100,30 @@ test("ABT", () => {
 });
 
 test('PrintSatangs', () =>{
-    expect(PrintSatangs(`67`)).toBe(`หกสิบเจ็ดสตางค์`)
-    expect(PrintSatangs(`37`)).toBe(`สามสิบเจ็ดสตางค์`)
-    expect(PrintSatangs(`31`)).toBe(`สามสิบเอ็ดสตางค์`)
-    expect(PrintSatangs(`21`)).toBe(`ยี่สิบเอ็ดสตางค์`)
-    expect(PrintSatangs(`01`)).toBe(`หนึ่งสตางค์`)
-    expect(PrintSatangs(`1`)).toBe(`สิบสตางค์`)
-    expect(PrintSatangs(``)).toBe(`ถ้วน`)
-    expect(PrintSatangs(`0`)).toBe(`ถ้วน`)
-    expect(PrintSatangs(`00`)).toBe(`ถ้วน`)
-    expect(PrintSatangs(`0000`)).toBe(`ถ้วน`)
-    expect(PrintSatangs(`dd`)).toBe(undefined)
-    expect(PrintSatangs(`999`)).toBe(undefined);
+    expect(PrintSatangs(`67`)[0]).toBe(`หกสิบเจ็ดสตางค์`)
+    expect(PrintSatangs(`37`)[0]).toBe(`สามสิบเจ็ดสตางค์`);
+    expect(PrintSatangs(`31`)[0]).toBe(`สามสิบเอ็ดสตางค์`);
+    expect(PrintSatangs(`21`)[0]).toBe(`ยี่สิบเอ็ดสตางค์`);
+    expect(PrintSatangs(`01`)[0]).toBe(`หนึ่งสตางค์`);
+    expect(PrintSatangs(`1`)[0]).toBe(`สิบสตางค์`);
+    expect(PrintSatangs(``)[0]).toBe(FULLBAHT);
+    expect(PrintSatangs(`0`)[0]).toBe(FULLBAHT);
+    expect(PrintSatangs(`00`)[0]).toBe(FULLBAHT);
+    expect(PrintSatangs(`0000`)[0]).toBe(FULLBAHT);
+    expect(PrintSatangs(`dd`)[0]).toBe(undefined);
+    expect(PrintSatangs(`999`)[0]).toBe(undefined);
 })
+
+test(`PrintSatangs 2d+`, () => {
+  expect(PrintSatangs(``, `c`)[0]).toBe(FULLBAHT);
+  expect(PrintSatangs(`9900000000000000001`, `c`)[0]).toBe(FULLBAHT);
+  expect(PrintSatangs(`99`, `c`)[0]).toBe(`เก้าสิบเก้าสตางค์`);
+  expect(PrintSatangs(`499`, `c`)[0]).toBe(`ห้าสิบสตางค์`);
+  expect(PrintSatangs(`490000000000001`, `c`)[0]).toBe(`ห้าสิบสตางค์`);
+  expect(PrintSatangs(`499`, `c`)[0]).toBe(`ห้าสิบสตางค์`);
+  expect(PrintSatangs(`499`, `f`)[0]).toBe(`สี่สิบเก้าสตางค์`);
+  expect(PrintSatangs(`49239480239`, `f`)[0]).toBe(`สี่สิบเก้าสตางค์`);
+});
 
 test(`BulkBahtText`, () =>{
     expect(BulkBahtText(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)).toBe(`อย่าลืมใช้โค้ด 9arm นะครับ ใช้เถอะ เค้าจะได้จ้างผมต่อ`)
@@ -369,3 +387,25 @@ test(`sep`, () => {
   expect(SEP(`2501.33`)).toBe(`สอง-พัน-ห้า-ร้อย-เอ็ด-บาท-สาม-สิบ-สาม-สตางค์`);
   expect(SEP(`1234.56`)).toBe(`หนึ่ง-พัน-สอง-ร้อย-สาม-สิบ-สี่-บาท-ห้า-สิบ-หก-สตางค์`);
 })
+
+test(`data type`, () => {
+  const d = {
+    s: `string`,
+    f: `function`,
+    o: `object`,
+  };
+  expect(typeof FULLBAHT).toBe(d.s);
+  expect(typeof BAHT).toBe(d.s);
+  expect(typeof NumText).toBe(d.f);
+  expect(typeof BT).toBe(d.f);
+  expect(typeof ABT).toBe(d.f);
+  expect(typeof PrintSatangs).toBe(d.f);
+  expect(typeof BulkBahtText).toBe(d.f);
+  expect(typeof TB).toBe(d.f);
+  expect(typeof repeat).toBe(d.f);
+  expect(typeof IsValidTB).toBe(d.f);
+  expect(typeof IsValidText).toBe(d.f);
+  expect(typeof OB).toBe(d.f);
+  expect(typeof LNBT).toBe(d.f);
+  expect(typeof SEP).toBe(d.f);
+});
