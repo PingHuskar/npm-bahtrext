@@ -1,7 +1,9 @@
 const DEBUG = false;
 
 const GoogleSheetsCellCharactersLimit = 50000;
-const VERSION = `1.4.1`;
+const VERSION = `1.4.2`;
+
+const negative = `ลบ`;
 
 const SPECIALONE = `เอ็ด`;
 const SPECIALTWO = `ยี่`;
@@ -227,4 +229,5 @@ module.exports = {
   octalRegex2,
   MAX_SAFE_INTEGER,
   THB,
+  negative,
 };

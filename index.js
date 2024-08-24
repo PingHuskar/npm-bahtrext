@@ -33,6 +33,7 @@ const {
   large_numbers,
   MAX_SAFE_INTEGER,
   THB,
+  negative,
 } = require("./consts.js");
 const { isOctal, toDec } = require("./octal.js");
 const op = require(`operation-strint`)
@@ -201,14 +202,12 @@ const BF = (flexmoney, ed = false, InvalidType = `Invalid Type`, OL = false) => 
   if (!flexmoney) return undefined;
   if (typeof flexmoney !== "string") return InvalidType;
   let money = flexmoney;
-  if (DEBUG) console.log(money);
   for (const THAI2ARABICNumeral of THAI2ARABICNumerals) {
     money = money.replace(
       RegExp(THAI2ARABICNumeral.th, `g`),
       THAI2ARABICNumeral.a
     );
   }
-  if (DEBUG) console.log(money);
   return BT(money, ed, OL);
 };
 
@@ -385,20 +384,34 @@ const IsValidTB = (str) => {
   return str === BTTB.replace(FULLBAHT, "");
 };
 
-const ABT = (money, ed = false) => {
-  if (!money) return undefined;
+const ABT = (money, ed = false, allow_neg = false, neg = negative) => {
+  let retVal = undefined;
+  if (!money) return retVal;
   switch (typeof money) {
     case "number":
       if (money > MAX_SAFE_INTEGER) {
         console.warn(`Consider use BahtRext`);
       }
-      const THBText = require("thai-baht-text");
-      return THBText(money);
+      if (money < 0) {
+        retVal = `Try Another Solution`
+      } else {
+        const THBText = require("thai-baht-text");
+        retVal = THBText(money);
+      }
+      break
     case "string":
-      return BF(money, ed);
-    default:
-      return undefined;
-  }
+      if (allow_neg 
+        && /^\-([\d๐-๙]*)(\.\[\d๐-๙]{0,2}0*)?/.test(money)
+        && !(/^\-{2,}/.test(money))
+      ) {
+        money = money.replace(/^\-/, ``);
+        retVal = `${neg}${BF(money, ed)}`;
+      } else {
+        retVal = BF(money, ed);
+      }
+      break
+    }
+    return retVal
 }
 
 const repeat = (str,x) => {
