@@ -25,12 +25,13 @@
 
 ## Beliefs
 1. Money in Thai Baht can be translate to word
-2. Decimal places is only 2 digits; Banks stored 6 digits of decimal places if you want more digits, use Crypto
-3. CleanCode + Comment as Code
+2. Default Decimal places is 2 digits; 3+ digits are optional.
+3. Support Negative Number as Other Baht JS Library
 4. All Synchronous function
 5. This Number System not working well with large numbers.
 
 ## Fixes
+- 1.4.2 - add NEG
 - 1.3.3 - Update Version Thai Baht Text JS + add SEP
 - 1.2.1 - GoogleSheetsCellCharactersLimit
 - 1.2.0 - Dynamic `เอ็ด`

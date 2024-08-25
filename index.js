@@ -72,7 +72,6 @@ const padWithLeadingZeros = (num, totalLength) => {
 const hundredThousandToOne = (digits, ed = false) => {
   let word = ``;
   let c = 0;
-  if (DEBUG) console.log(`ed`,ed)
   const digitspadWithLeadingZeros = padWithLeadingZeros(digits, 6);
   for (let digit of digitspadWithLeadingZeros) {
     digit = parseInt(digit);
@@ -329,7 +328,6 @@ const TB = (BT, error = `Invalid String`) => {
   if (/บาท$/.test(BT)) BT = `${BT}${FULLBAHT}`
   if (!(/สตางค์$/.test(BT)) && !(/ถ้วน$/.test(BT))) return error;
   const [moneyBaht, moneySatang] = BT.split(BAHT);
-  if (DEBUG) console.log(moneyBaht, moneySatang);
   if (/สตางค์$/.test(moneyBaht) && !moneySatang) {
     return `0.${SatangNum(moneyBaht.replace(SATANG, ``))}`;
   }
@@ -384,7 +382,21 @@ const IsValidTB = (str) => {
   return str === BTTB.replace(FULLBAHT, "");
 };
 
-const ABT = (money, ed = false, allow_neg = false, neg = negative) => {
+const NEG = (money, ed = false, f = BF, neg = negative) => {
+  let retVal
+  if (
+    /^\-([\d๐-๙]*)(\.\[\d๐-๙]{0,2}0*)?/.test(money) &&
+    !/^\-{2,}/.test(money)
+  ) {
+    money = money.replace(/^\-/, ``);
+    retVal = `${neg}${f(money, ed)}`;
+  } else {
+    retVal = f(money, ed);
+  }
+  return retVal
+}
+
+const ABT = (money, ed = false, allow_neg = false) => {
   let retVal = undefined;
   if (!money) return retVal;
   switch (typeof money) {
@@ -400,12 +412,8 @@ const ABT = (money, ed = false, allow_neg = false, neg = negative) => {
       }
       break
     case "string":
-      if (allow_neg 
-        && /^\-([\d๐-๙]*)(\.\[\d๐-๙]{0,2}0*)?/.test(money)
-        && !(/^\-{2,}/.test(money))
-      ) {
-        money = money.replace(/^\-/, ``);
-        retVal = `${neg}${BF(money, ed)}`;
+      if (allow_neg) {
+        retVal = NEG(money, ed);
       } else {
         retVal = BF(money, ed);
       }
@@ -520,4 +528,5 @@ module.exports = {
   TEN,
   IsValidText,
   SEP,
+  NEG,
 };
