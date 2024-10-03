@@ -1,0 +1,1 @@
+module.exports = octalRegex1 = /^0o?[0-7]+$/i;

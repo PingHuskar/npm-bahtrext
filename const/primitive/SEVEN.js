@@ -1,0 +1,1 @@
+module.exports = SEVEN = `เจ็ด`;

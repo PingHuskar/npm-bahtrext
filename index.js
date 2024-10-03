@@ -34,7 +34,7 @@ const {
   MAX_SAFE_INTEGER,
   THB,
   negative,
-} = require("./consts.js");
+} = require("./const");
 const { isOctal, toDec } = require("./octal.js");
 const op = require(`operation-strint`)
 

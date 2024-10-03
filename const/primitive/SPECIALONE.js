@@ -1,0 +1,1 @@
+module.exports = SPECIALONE = `เอ็ด`;

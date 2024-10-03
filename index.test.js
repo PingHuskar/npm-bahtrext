@@ -1,7 +1,7 @@
 const {
   FULLBAHT,
   BAHT
-} = require("./consts")
+} = require("./const")
 const {
   NumText,
   BT,

@@ -1,0 +1,1 @@
+module.exports = ONE = `หนึ่ง`;

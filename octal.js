@@ -1,4 +1,4 @@
-const {octalRegex1, octalRegex2} = require('./consts')
+const {octalRegex1, octalRegex2} = require('./const')
 const op = require(`operation-strint`)
 const isOctal = (money) => {
     if (typeof(money) !== `string`) return undefined;
