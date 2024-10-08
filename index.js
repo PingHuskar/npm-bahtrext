@@ -26,7 +26,7 @@ const BahtText = require(`./function/BahtText`)
 const BT = require(`./function/BT`)
 const BF = require(`./function/BF`)
 
-const IsMatchInSkipsPattern = require(`./function/IsMatchInSkipsPattern`)
+// const IsMatchInSkipsPattern = require(`./function/IsMatchInSkipsPattern`)
 const BulkBahtText = require(`./function/BulkBahtText`);
 const NumText = require(`./function/NumText`)
 const SatangNum = require(`./function/SatangNum`)

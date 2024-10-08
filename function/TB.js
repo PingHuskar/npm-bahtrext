@@ -1,5 +1,10 @@
 const SatangNum = require(`./SatangNum`)
 const IsValidText = require(`./IsValidText`);
+const removeLeadingingZeros = require(`../snippet/removeLeadingingZeros`);
+const FULLBAHT = require(`../const/primitive/FULLBAHT`)
+const BAHT = require(`../const/primitive/BAHT`)
+const SATANG = require(`../const/primitive/SATANG`)
+
 module.exports = TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;
   if (/บาท$/.test(BT)) BT = `${BT}${FULLBAHT}`;

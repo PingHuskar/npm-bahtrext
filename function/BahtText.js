@@ -2,7 +2,13 @@ const splitIntFrac = require(`./splitIntFrac`)
 const MoneyLaundering = require(`./MoneyLaundering`)
 const PrintBaht = require(`./PrintBaht`)
 const { THAINUMBERWORDS , BAHT, FULLBAHT} = require(`../const`);
+const PrintSatangs = require(`./PrintSatangs`);
+const IsMoneyValidate = require("./IsMoneyValidate");
 const op = require(`operation-strint`);
+const MoneyInvalid = require(`../snippet/MoneyInvalid`);
+const THB = require("../const/THB")
+const READAS = require("../const/primitive/READAS");
+
 module.exports = BahtText = (
   money,
   ed = false,

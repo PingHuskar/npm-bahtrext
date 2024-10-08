@@ -1,5 +1,7 @@
 const large_numbers = require(`../const/array/large_numbers`)
 const BT = require(`./BT`)
+const repeat = require("./repeat")
+
 module.exports = LNBT = (nameorpowerof10, d = `1`) => {
   const tnameorpowerof10 = typeof nameorpowerof10;
   switch (tnameorpowerof10) {

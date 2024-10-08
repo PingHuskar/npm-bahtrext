@@ -1,5 +1,7 @@
 const {isOctal, toDec} = require(`../octal`)
 const MoneyInvalid = require(`../snippet/MoneyInvalid`);
+const BahtText = require("./BahtText");
+
 module.exports = BT = (money, ed = false, OL = false, rounding = ``) => {
   const isOL = OL && isOctal(money);
   if (isOL) {

@@ -3,13 +3,12 @@
 ![Total Download](https://img.shields.io/npm/dt/bahtrext.svg)
 
 ## Demo / Example
-- [Codepen](https://codepen.io/chadin-chaipornpisuth/full/rNbzyom)
 - React
   - [BahtGame](https://timely-fenglisu-b68fd6.netlify.app/)
   - [scroll-trigger](https://github.com/PingHuskar/bahtrext-scroll-trigger)
 
 ## Must Read
-- **Checkout Test Cases in `index.test.js` Before Implement**
+- **Checkout Test Cases in `./test` Before Implement**
 - **`101`** ควรจะถูกอ่านอย่างไร ?
   - `หนึ่งร้อยหนึ่งบาทถ้วน`
     - [`Google Sheets`](https://sheets.google.com/)
@@ -33,7 +32,7 @@
 5. This Number System not working well with large numbers.
 
 ## Changes
-- 1.4.3 - 1.4.4 - Refactor
+- 1.4.3 - 1.4.5 - Refactor
 - 1.4.2 - add NEG
 - 1.3.3 - Update Version Thai Baht Text JS + add SEP
 - 1.2.1 - GoogleSheetsCellCharactersLimit
