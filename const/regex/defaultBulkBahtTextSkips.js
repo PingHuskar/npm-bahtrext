@@ -1,1 +1,0 @@
-module.exports = defaultBulkBahtTextSkips = [/\b5+\+?\b/];

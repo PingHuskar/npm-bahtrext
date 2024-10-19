@@ -1,1 +1,0 @@
-module.exports = removeLeadingingZeros = (string) => string.replace(/^0+/g, "");

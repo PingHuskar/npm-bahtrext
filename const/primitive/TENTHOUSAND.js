@@ -1,1 +1,0 @@
-module.exports = TENTHOUSAND = `หมื่น`;

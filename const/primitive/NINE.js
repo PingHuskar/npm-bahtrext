@@ -1,1 +1,0 @@
-module.exports = NINE = `เก้า`;

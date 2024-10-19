@@ -1,1 +1,0 @@
-module.exports = SPLITPATTERN = /^(\d*)(\.\d{0,2}0*)?$/;

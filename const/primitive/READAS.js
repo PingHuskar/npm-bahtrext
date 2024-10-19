@@ -1,1 +1,0 @@
-module.exports = READAS = `อ่านว่า`;

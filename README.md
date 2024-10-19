@@ -2,6 +2,9 @@
 ![Download/month](https://img.shields.io/npm/dm/bahtrext.svg)
 ![Total Download](https://img.shields.io/npm/dt/bahtrext.svg)
 
+
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg?logo=jest)](https://github.com/jestjs/jest)
+
 ## Demo / Example
 - React
   - [BahtGame](https://timely-fenglisu-b68fd6.netlify.app/)

@@ -1,9 +1,16 @@
 {
   "name": "bahtrext",
-  "version": "1.4.5",
+  "version": "2.0.0",
+  "type": "module",
   "description": "BahtText Stringify",
-  "main": "index.js",
+  "main": "index.mjs",
+  "jest": {
+    "verbose": true,
+    "testMatch": ["**/*.test.mjs?(x)"],
+    "transform": {}
+  },
   "scripts": {
+    "start": "node app.js",
     "test": "jest",
     "cv": "jest --coverage"
   },

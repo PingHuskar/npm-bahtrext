@@ -1,0 +1,2 @@
+const GoogleSheetsCellCharactersLimit = 50000;
+export default GoogleSheetsCellCharactersLimit;

@@ -1,1 +1,0 @@
-module.exports = HUNDRED = `ร้อย`;
