@@ -6,6 +6,7 @@ import FTHAISATANGWORDS from "../const/array/FTHAISATANGWORDS.mjs"
 import LTHAISATANGWORDS from "../const/array/LTHAISATANGWORDS.mjs"
 import THAINUMBERWORDS from "../const/array/THAINUMBERWORDS.mjs"
 import padWithLeadingZeros from "../snippet/padWithLeadingZeros.mjs"
+import TEN from "../const/primitive/TEN.mjs";
 
 const SatangNum = (moneySatang) => {
   if (moneySatang == FULLBAHT) {

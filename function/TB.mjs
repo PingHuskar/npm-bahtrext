@@ -4,6 +4,8 @@ import removeLeadingZeros from "../snippet/removeLeadingZeros.mjs";
 import FULLBAHT from "../const/primitive/FULLBAHT.mjs";
 import BAHT from "../const/primitive/BAHT.mjs";
 import SATANG from "../const/primitive/SATANG.mjs";
+import MILLION from "../const/primitive/MILLION.mjs";
+import padWithLeadingZeros from "../snippet/padWithLeadingZeros.mjs";
 
 const TB = (BT, error = `Invalid String`) => {
   if (!BT) return undefined;

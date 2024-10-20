@@ -34,7 +34,13 @@
 4. All Synchronous function
 5. This Number System not working well with large numbers.
 
-## Changes
+## Change V2
+> Next Update Coming Soon
+- 2.0.0 - ES6
+
+
+
+## Change V1
 - 1.4.3 - 1.4.5 - Refactor
 - 1.4.2 - add NEG
 - 1.3.3 - Update Version Thai Baht Text JS + add SEP

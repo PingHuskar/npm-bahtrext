@@ -1,6 +1,7 @@
-import NumText from "../function/NumText.mjs";
+import f from "../function/NumText.mjs";
 
 test("NumText", () => {
-  expect(NumText(`ไม่เอา123`)).toBe(`ไม่เอาหนึ่งสองสาม`);
-  expect(NumText(84000)).toBe(`Invalid Type`);
+  expect(f()).toBe(undefined);
+  expect(f(`ไม่เอา123`)).toBe(`ไม่เอาหนึ่งสองสาม`);
+  expect(f(84000)).toBe(`Invalid Type`);
 });

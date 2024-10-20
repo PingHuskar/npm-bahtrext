@@ -3,8 +3,8 @@ import THAINUMBERWORDS from "../const/array/THAINUMBERWORDS.mjs";
 import SPECIALONE from "../const/primitive/SPECIALONE.mjs";
 import SPECIALTWO from "../const/primitive/SPECIALTWO.mjs";
 import TEN from "../const/primitive/TEN.mjs";
-
 import padWithLeadingZeros from "../snippet/padWithLeadingZeros.mjs";
+
 const hundredThousandToOne = (digits, ed = false) => {
   let word = ``;
   let c = 0;

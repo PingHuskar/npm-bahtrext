@@ -1,6 +1,6 @@
-import repeat from "../function/repeat.mjs";
+import f from "../function/repeat.mjs";
 
 test("repeat", () => {
-  expect(repeat(`ค`, [3])).toBe(`คคค`);
-  expect(`ปิดสวิตซ์ ${repeat(`ป`, [3])} ป่าหี่`).toBe(`ปิดสวิตซ์ ปปป ป่าหี่`);
+  expect(f(`ค`, [3])).toBe(`คคค`);
+  expect(`ปิดสวิตซ์ ${f(`ป`, [3])} ป่าหี่`).toBe(`ปิดสวิตซ์ ปปป ป่าหี่`);
 });
