@@ -1,5 +1,5 @@
-import { PrintSatangs } from "../index.mjs";
-import { FULLBAHT } from "../const/index.mjs";
+import PrintSatangs from "../function/PrintSatangs.mjs";
+import FULLBAHT from "../const/primitive/FULLBAHT.mjs";
 
 test("PrintSatangs", () => {
   expect(PrintSatangs(`67`)[0]).toBe(`หกสิบเจ็ดสตางค์`);

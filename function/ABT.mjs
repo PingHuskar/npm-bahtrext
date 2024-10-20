@@ -1,7 +1,7 @@
 import THBText from "thai-baht-text";
 import NEG from "./NEG.mjs";
 import BF from "./BF.mjs";
-import { MAX_SAFE_INTEGER } from "../const/index.mjs";
+import MAX_SAFE_INTEGER from "../const/primitive/MAX_SAFE_INTEGER.mjs";
 
 const ABT = (money, ed = false, allow_neg = false) => {
   let retVal = undefined;

@@ -1,4 +1,4 @@
-import { repeat } from "../index.mjs";
+import repeat from "../function/repeat.mjs";
 
 test("repeat", () => {
   expect(repeat(`ค`, [3])).toBe(`คคค`);

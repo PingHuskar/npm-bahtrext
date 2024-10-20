@@ -1,5 +1,5 @@
-import { FULLBAHT } from "../const/index.mjs"
-import {OneToTenTextRegex} from "../const/index.mjs"
+import FULLBAHT from "../const/primitive/FULLBAHT.mjs";
+import OneToTenTextRegex from "../const/regex/OneToTenTextRegex.mjs";
 import ElevenToNineteenRegex from "../const/regex/ElevenToNineteenRegex.mjs"
 import TwentyToNinetyNine from "../const/regex/TwentyToNinetyNine.mjs"
 import FTHAISATANGWORDS from "../const/array/FTHAISATANGWORDS.mjs"

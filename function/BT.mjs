@@ -1,4 +1,4 @@
-import { isOctal, toDec } from "../octal.mjs";
+import { isOctal, toDec } from "../octal/index.mjs";
 import MoneyInvalid from "../snippet/MoneyInvalid.mjs";
 import BahtText from "./BahtText.mjs";
 import READAS from "../const/primitive/READAS.mjs";

@@ -1,4 +1,4 @@
-import {BT} from "./index.mjs"
+import BT from "./function/BT.mjs";
 import THBText from "thai-baht-text"
 import { bahttext } from "bahttext";
 import { convert } from "numbaht";

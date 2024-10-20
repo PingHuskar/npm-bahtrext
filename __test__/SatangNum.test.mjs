@@ -1,4 +1,4 @@
-import { SatangNum } from "../index.mjs";
+import SatangNum from "../function/SatangNum.mjs";
 
 test("SatangNum", () => {
   expect(SatangNum("ถ้วน")).toBe("00");

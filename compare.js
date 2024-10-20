@@ -1,5 +1,5 @@
-import {BT} from "./index.mjs"
-import { toDec } from "./octal.mjs";
+import BT from "./function/BT.mjs"
+import toDec from "./octal/toDec.mjs";
 import THBText from "thai-baht-text";
 
 let a = 29999999999999999;

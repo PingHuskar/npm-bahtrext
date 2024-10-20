@@ -1,5 +1,5 @@
-import { BT } from "../index.mjs";
-import { TB } from "../index.mjs";
+import BT from "../function/BT.mjs";
+import TB from "../function/TB.mjs";
 
 test("Reverse BahtText", () => {
   expect(TB(BT(`123`))).toBe(`123.00`);

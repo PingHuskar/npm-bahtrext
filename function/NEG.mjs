@@ -1,4 +1,4 @@
-import { negative } from "../const/index.mjs"
+import negative from "../const/primitive/negative.mjs";
 import BF from "./BF.mjs"
 
 const NEG = (money, ed = false, f = BF, neg = negative) => {

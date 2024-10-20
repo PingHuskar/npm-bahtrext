@@ -1,4 +1,4 @@
-import { LNBT } from "../index.mjs";
+import LNBT from "../function/LNBT.mjs";
 
 test(`LNBT`, () => {
   expect(LNBT(`Googolplex`)).toBe(`Don't Try This`);

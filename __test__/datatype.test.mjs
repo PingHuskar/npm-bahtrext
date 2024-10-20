@@ -1,5 +1,5 @@
-import { FULLBAHT } from "../const/index.mjs";
-import BAHT from "../const/index.mjs";
+import FULLBAHT from "../const/primitive/FULLBAHT.mjs";
+import BAHT from "../const/primitive/BAHT.mjs";
 import {
   NumText,
   BT,

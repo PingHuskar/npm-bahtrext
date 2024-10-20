@@ -1,4 +1,4 @@
-import { SEP } from "../index.mjs";
+import SEP from "../function/SEP.mjs";
 
 test(`sep`, () => {
   expect(SEP(`11`, `;;;`)).toBe(`สิบ;;;เอ็ด`);

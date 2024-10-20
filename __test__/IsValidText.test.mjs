@@ -1,4 +1,4 @@
-import { IsValidText } from "../index.mjs";
+import IsValidText from "../function/IsValidText.mjs";
 
 test(`IsValidText`, () => {
   expect(

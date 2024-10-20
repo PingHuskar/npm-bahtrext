@@ -1,8 +1,8 @@
 import REVERSETHAIDIGITWORDS from "../const/array/REVERSETHAIDIGITWORDS.mjs";
-import {THAINUMBERWORDS} from "../const/index.mjs";
-import {SPECIALONE} from "../const/index.mjs";
-import {SPECIALTWO} from "../const/index.mjs";
-import {TEN} from "../const/index.mjs";
+import THAINUMBERWORDS from "../const/array/THAINUMBERWORDS.mjs";
+import SPECIALONE from "../const/primitive/SPECIALONE.mjs";
+import SPECIALTWO from "../const/primitive/SPECIALTWO.mjs";
+import TEN from "../const/primitive/TEN.mjs";
 
 import padWithLeadingZeros from "../snippet/padWithLeadingZeros.mjs";
 const hundredThousandToOne = (digits, ed = false) => {

@@ -1,4 +1,4 @@
-import { BT } from "../index.mjs";
+import BT from "../function/BT.mjs";
 import op from "operation-strint";
 
 test(`BT CEIL`, () => {

@@ -1,4 +1,5 @@
-import { isOctal,toDec } from "./octal.mjs";
+import isOctal from "./isOctal.mjs";
+import toDec from "./toDec.mjs";
 
 test(`isOctal`, () => {
   expect(isOctal(`077`)).toBe(true)
