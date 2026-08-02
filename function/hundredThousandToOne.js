@@ -31,13 +31,9 @@ export default (digits, ed = false) => {
     if (!d) return;
     if (i === 4 && (w += getDigit(d))) return;
     if (i === 5) {
-      if (
-        d === 1 &&
-        (ed || Z[4] !== "0") &&
-        (w += SPECIALONE)
-      )
-        return;
-      (w += `${THAINUMBERWORDS[d]}${REVERSETHAIDIGITWORDS[i]}`); return;
+      if (d === 1 && (ed || Z[4] !== "0") && (w += SPECIALONE)) return;
+      w += `${THAINUMBERWORDS[d]}${REVERSETHAIDIGITWORDS[i]}`;
+      return;
     }
     w += `${THAINUMBERWORDS[d]}${REVERSETHAIDIGITWORDS[i]}`;
   });

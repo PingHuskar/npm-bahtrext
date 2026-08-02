@@ -1,6 +1,6 @@
-import removeLeadingZeros from '../snippet/removeLeadingZeros';
-import BulkReplace from '../snippet/BulkReplace';
+import { removeLeadingZeros, BulkReplace } from "../snippet";
 
-export default (money) => {
-  return removeLeadingZeros(BulkReplace(money, "", /[,\s_]/g));
-};
+const MoneyLaundering = (input) =>
+  removeLeadingZeros(BulkReplace(input, "", /[,\s_]/g));
+
+export default MoneyLaundering;

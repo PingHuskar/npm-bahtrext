@@ -1,12 +1,12 @@
 {
   "name": "bahtrext",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "BahtText Stringify",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "cv": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "testcv": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "author": "Chadin Chaipornpisuth",
   "license": "MIT",

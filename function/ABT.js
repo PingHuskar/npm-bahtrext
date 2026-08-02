@@ -1,12 +1,10 @@
-import NEG from './NEG';
-import BF from './BF';
-import iTHBText from './iTHBText';
-import { negative } from '../const';
-import {ed, allowNeg} from "../const/defaultConfig"
+import NEG from "./NEG";
+import BF from "./BF";
+import iTHBText from "./iTHBText";
+import { negative } from "../const";
+import { ed, allowNeg } from "../const/defaultConfig";
 
-export default (money, defaultConfig = {ed, allowNeg}) => {
-  if (!money) return undefined;
-  
+export default (money, defaultConfig = { ed, allowNeg }) => {
   const { ed, allowNeg } = defaultConfig;
 
   if (["number", "bigint"].includes(typeof money)) {

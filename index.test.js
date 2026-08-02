@@ -1,4 +1,4 @@
-import { FULLBAHT, BAHT, INFINITY, SATANG, MILLION } from "./const";
+import { FULLBAHT, BAHT, INFINITY, SATANG } from "./const";
 import { ed } from "./const/defaultConfig";
 import BR, {
   NumText,
@@ -131,6 +131,9 @@ describe.each([
 });
 
 test("ABT", () => {
+  expect(ABT("")).toBeUndefined();
+  expect(ABT("0")).toBe("ศูนย์บาทถ้วน");
+  expect(ABT(0)).toBe("ศูนย์บาทถ้วน");
   expect(ABT(Number.MAX_VALUE)).toBe(INFINITY);
   expect(ABT(-Number.MAX_VALUE)).toBe(`ลบ${INFINITY}`);
   expect(ABT(`${Number.MAX_VALUE}`)).toBe(INFINITY);

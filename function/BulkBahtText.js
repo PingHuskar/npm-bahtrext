@@ -1,8 +1,7 @@
-import BF from "./BF"
-import defaultBulkBahtTextPat from '../const/defaultConfig/BulkBahtTextPat';
-import InvalidType from "../const/error/InvalidType"
-import ed from '../const/defaultConfig/ed';
-import invariant from 'tiny-invariant';
+import BF from "./BF";
+import defaultBulkBahtTextPat from "../const/defaultConfig/BulkBahtTextPat";
+import InvalidType from "../const/error/InvalidType";
+import ed from "../const/defaultConfig/ed";
 
 export default (
   str,
@@ -12,12 +11,15 @@ export default (
   }
 ) => {
   if (typeof str !== "string") return InvalidType;
-  if (!str) return '';
+  if (!str) return "";
 
   const { pat, ed } = options;
 
   let result = str;
-  let regex = pat instanceof RegExp && !pat.global ? new RegExp(pat.source, pat.flags + 'g') : pat;
+  let regex =
+    pat instanceof RegExp && !pat.global
+      ? new RegExp(pat.source, pat.flags + "g")
+      : pat;
   let match;
   while ((match = regex.exec(str)) !== null) {
     let number = match[0];

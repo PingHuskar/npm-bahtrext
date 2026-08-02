@@ -1,6 +1,6 @@
-import large_numbers from '../const/array/large_numbers';
-import BT from './BTv2';
-import repeat from '../snippet/repeat';
+import large_numbers from "../const/array/large_numbers";
+import BT from "./BTv2";
+import repeat from "../snippet/repeat";
 
 export default (nameorpowerof10, d = 1) => {
   const type = typeof nameorpowerof10;

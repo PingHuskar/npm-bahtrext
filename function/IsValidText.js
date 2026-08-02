@@ -9,9 +9,9 @@ import {
   TEN,
   REVERSETHAIDIGITWORDS,
   ONETONINE,
-} from "../const"
+} from "../const";
 
-import ISGREQ from "../snippet/ISGREQ"
+import ISGREQ from "../snippet/ISGREQ";
 
 // Helper function to check if digit positions are in correct order
 const areDigitPositionsValid = (indices) => {
@@ -57,8 +57,11 @@ export default (text) => {
   const millionSegments = text.split(MILLION);
   for (const sixdigitsword of millionSegments) {
     // Check for duplicate position words
-    if (REVERSETHAIDIGITWORDS.slice(0, -1).some(word =>
-      sixdigitsword.split(word).length > 2)) {
+    if (
+      REVERSETHAIDIGITWORDS.slice(0, -1).some(
+        (word) => sixdigitsword.split(word).length > 2
+      )
+    ) {
       return false;
     }
 

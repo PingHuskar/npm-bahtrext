@@ -1,7 +1,15 @@
-import ABT from './ABT';
-import applyReplacements from '../snippet/applyReplacements';
-import { ONETONINE, REVERSETHAIDIGITWORDS, MILLION, SPECIALONE, SPECIALTWO, BAHT, FULLBAHT } from "../const";
-import defaultSeparator from "../const/defaultConfig/separator"
+import ABT from "./ABT";
+import applyReplacements from "../snippet/applyReplacements";
+import {
+  ONETONINE,
+  REVERSETHAIDIGITWORDS,
+  MILLION,
+  SPECIALONE,
+  SPECIALTWO,
+  BAHT,
+  FULLBAHT,
+} from "../const";
+import defaultSeparator from "../const/defaultConfig/separator";
 
 export default (num, separator = defaultSeparator) => {
   let ret = ABT(num, { ed: true });
@@ -13,7 +21,7 @@ export default (num, separator = defaultSeparator) => {
   };
 
   replaceWithSeparator(ONETONINE);
-  replaceWithSeparator(REVERSETHAIDIGITWORDS.filter((x) => x !== ''));
+  replaceWithSeparator(REVERSETHAIDIGITWORDS.filter((x) => x !== ""));
 
   ret = applyReplacements(ret, [MILLION, SPECIALONE, SPECIALTWO], separator)
     .replace(`${BAHT}${FULLBAHT}`, "")

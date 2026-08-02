@@ -2,3 +2,5 @@ compare.js
 compare.test.js
 .vscode
 .git
+Jenkinsfile
+tracer.js

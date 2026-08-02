@@ -1,4 +1,4 @@
-import padWithLeadingZeros from '../snippet/padWithLeadingZeros';
+import padWithLeadingZeros from "../snippet/padWithLeadingZeros";
 import {
   FULLBAHT,
   TEN,
@@ -8,7 +8,7 @@ import {
   OneToTenTextRegex,
   ElevenToNineteenRegex,
   TwentyToNinetyNine,
-} from '../const';
+} from "../const";
 
 export default (moneySatang) => {
   if (moneySatang === FULLBAHT) return `00`;

@@ -1,5 +1,5 @@
-import THAINUMBERWORDS from '../const/array/THAINUMBERWORDS';
-import InvalidType from '../const/error/InvalidType';
+import THAINUMBERWORDS from "../const/array/THAINUMBERWORDS";
+import InvalidType from "../const/error/InvalidType";
 
 export default (str) => {
   if (typeof str !== "string") return InvalidType;

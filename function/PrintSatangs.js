@@ -1,12 +1,12 @@
-import { FULLBAHT, SATANG } from '../const';
-import SatangFirstDigit from './SatangFirstDigit';
-import SatangSecondDigit from './SatangSecondDigit';
-import { sum } from 'operation-strint';
-import defaultRounding from "../const/defaultConfig/rounding"
-import ceiling from "../const/defaultConfig/ceiling"
+import { FULLBAHT, SATANG } from "../const";
+import SatangFirstDigit from "./SatangFirstDigit";
+import SatangSecondDigit from "./SatangSecondDigit";
+import { sum } from "operation-strint";
+import defaultRounding from "../const/defaultConfig/rounding";
+import ceiling from "../const/defaultConfig/ceiling";
 
 export default (satangs, rounding = defaultRounding) => {
-  if (/^0*$/.exec(satangs)) return {word: FULLBAHT, carry: `0`};
+  if (/^0*$/.exec(satangs)) return { word: FULLBAHT, carry: `0` };
   if (
     (!/^\d{0,2}$/.test(satangs) && rounding === defaultRounding) ||
     /[^\d]/.test(satangs)

@@ -1,10 +1,10 @@
-import { THAI2ARABICNumerals } from '../const';
-import BT from './BTv2';
-import BulkReplace from '../snippet/BulkReplace';
+import { THAI2ARABICNumerals } from "../const";
+import BT from "./BTv2";
+import BulkReplace from "../snippet/BulkReplace";
 import InvalidType from "../const/error/InvalidType";
-import ed from "../const/defaultConfig/ed"
-import OL from "../const/defaultConfig/OL"
-import TBF from './TBF';
+import ed from "../const/defaultConfig/ed";
+import OL from "../const/defaultConfig/OL";
+import TBF from "./TBF";
 
 export default (
   flexmoney,

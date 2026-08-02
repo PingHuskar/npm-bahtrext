@@ -1,13 +1,18 @@
-import { isOctal, toDecOctal } from '../base/octal';
-import { isBin, toDecBin as toBin } from '../base/binary';
-import { isHex, toHex } from '../base/hexadecimal';
-import MoneyInvalid from '../snippet/MoneyInvalid';
-import BahtText from './BahtText';
-import ISINFSTR from './ISINFSTR'
-import { THB, READAS, GoogleSheetsCellCharactersLimit, INFINITY } from '../const';
+import { isOctal, toDecOctal } from "../base/octal";
+import { isBin, toDecBin as toBin } from "../base/binary";
+import { isHex, toHex } from "../base/hexadecimal";
+import MoneyInvalid from "../snippet/MoneyInvalid";
+import BahtText from "./BahtText";
+import ISINFSTR from "./ISINFSTR";
+import {
+  THB,
+  READAS,
+  GoogleSheetsCellCharactersLimit,
+  INFINITY,
+} from "../const";
 
-export default (money, ed = false, OL = false, rounding = '') => {
-  if (ISINFSTR(money)) return INFINITY
+export default (money, ed = false, OL = false, rounding = "") => {
+  if (ISINFSTR(money)) return INFINITY;
   if (OL && isOctal(money)) {
     money = toDecOctal(money);
   } else if (isBin(money)) {
@@ -16,14 +21,7 @@ export default (money, ed = false, OL = false, rounding = '') => {
     money = toHex(money);
   }
 
-  const rBahtText = BahtText(
-    money,
-    ed,
-    rounding,
-    THB,
-    MoneyInvalid,
-    READAS,
-  );
+  const rBahtText = BahtText(money, ed, rounding, THB, MoneyInvalid, READAS);
 
   const retText = rBahtText.split('"').at(-2);
   if (!retText) return undefined;
