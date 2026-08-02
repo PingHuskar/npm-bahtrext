@@ -22,6 +22,7 @@ import SEP from "./SEP";
 import ISINFSTR from "./ISINFSTR";
 import LeadingSpecialOneToOne from "./LeadingSpecialOneToOne";
 import PrintDotMRR from "./PrintDotMRR";
+import MillionScaleText from "./MillionScaleText";
 
 export {
   MoneyLaundering,
@@ -47,4 +48,5 @@ export {
   ISINFSTR,
   LeadingSpecialOneToOne,
   PrintDotMRR,
+  MillionScaleText,
 };

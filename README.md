@@ -67,6 +67,16 @@ npm install bahtrext@1.7.2
 4. All Synchronous function
 5. This Number System not working well with large numbers. Is there a better way to read numbers in Thai?
 
+## Quick API Snippets
+
+```js
+import { MillionScaleText } from "bahtrext";
+
+// Source content example: "1 ใน 5,566,857,732,147,160,000,000"
+const shortText = MillionScaleText("5,566,857,732,147,160,000,000");
+// shortText => "ห้าพันห้าร้อยหกสิบหกล้านล้านล้าน"
+```
+
 
 ## Test Regex
 - [ValidSATANGRegex](https://regex101.com/r/yVvsFN/3)
@@ -83,6 +93,7 @@ npm install bahtrext@1.7.2
 [Chadin Chaipornpisuth](https://chadindev.in.th/)
 
 ## Changes
+- 2.5.2 - add `MillionScaleText` helper for compact ล้าน-scale wording
 - 2.4.0 - Clean Code?
 - 2.3.4 - Infinity
 - 2.2.0 - ES6 [1.7.2]

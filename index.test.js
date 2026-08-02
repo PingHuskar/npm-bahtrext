@@ -20,6 +20,7 @@ import BR, {
   NEG,
   PrintDotMRR,
   VERSION,
+  MillionScaleText,
 } from ".";
 import op from "operation-strint";
 import { InvalidType, InvalidString } from "./const/error";
@@ -496,6 +497,14 @@ test(`sum bt`, () => {
   expect(BT(op.sum(`12`, `25`))).toBe(`สามสิบเจ็ดบาทถ้วน`);
   expect(BT(op.sum(`12`, `12`))).toBe(`ยี่สิบสี่บาทถ้วน`);
 });
+
+test(`MillionScaleText`, () => {
+  const func = MillionScaleText;
+  expect(NumText(`1`) + ` ใน ` + func(`5,566,857,732,147,160,000,000`)).toBe(
+    `หนึ่ง ใน ` + `ห้าพันห้าร้อยหกสิบหกล้านล้านล้าน`
+  );
+});
+
 test(`minus bt`, () => {
   expect(BT(op.minus(`12`, `12`))).toBe(`ศูนย์บาทถ้วน`);
 });

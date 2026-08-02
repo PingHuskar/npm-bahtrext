@@ -62,6 +62,10 @@ export declare function NEG(
   num: string,
   options: { ed?: boolean; neg?: boolean }
 ): string | undefined;
+export declare function MillionScaleText(
+  num: string | number,
+  config?: { ed?: boolean; OL?: boolean; rounding?: "c" | "f" | "" }
+): string | undefined;
 
 export declare class BR {
   constructor(num: string | number);

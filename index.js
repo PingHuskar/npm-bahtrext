@@ -30,6 +30,7 @@ import {
   ISINFSTR,
   LeadingSpecialOneToOne,
   PrintDotMRR,
+  MillionScaleText,
 } from "./function";
 
 import { removeLeadingZeros, repeat } from "./snippet";
@@ -181,4 +182,5 @@ export {
   ISINFSTR,
   VERSION,
   PrintDotMRR,
+  MillionScaleText,
 };
