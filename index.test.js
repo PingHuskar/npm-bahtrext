@@ -1,4 +1,4 @@
-import { FULLBAHT, BAHT, INFINITY, SATANG } from "./const";
+import { FULLBAHT, BAHT, INFINITY, SATANG, MILLION } from "./const";
 import { ed } from "./const/defaultConfig";
 import BR, {
   NumText,
@@ -21,6 +21,7 @@ import BR, {
   PrintDotMRR,
   VERSION,
   MillionScaleText,
+  CompactScaleText,
 } from ".";
 import op from "operation-strint";
 import { InvalidType, InvalidString } from "./const/error";
@@ -503,6 +504,15 @@ test(`MillionScaleText`, () => {
   expect(NumText(`1`) + ` ใน ` + func(`5,566,857,732,147,160,000,000`)).toBe(
     `หนึ่ง ใน ` + `ห้าพันห้าร้อยหกสิบหกล้านล้านล้าน`
   );
+});
+
+test("CompactScaleText", () => {
+  const func = CompactScaleText;
+  expect(
+    func(
+      `1035531362097366437658125676806059750189964336484946134542090486895029450514590979495591124336086177139938812952029085090597851627520000000`
+    )
+  ).toBe(`1.036` + ` ตามด้วยคำว่า "${MILLION}" ` + `23` + ` ครั้ง`);
 });
 
 test(`minus bt`, () => {

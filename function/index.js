@@ -23,6 +23,7 @@ import ISINFSTR from "./ISINFSTR";
 import LeadingSpecialOneToOne from "./LeadingSpecialOneToOne";
 import PrintDotMRR from "./PrintDotMRR";
 import MillionScaleText from "./MillionScaleText";
+import CompactScaleText from "./CompactScaleText";
 
 export {
   MoneyLaundering,
@@ -49,4 +50,5 @@ export {
   LeadingSpecialOneToOne,
   PrintDotMRR,
   MillionScaleText,
+  CompactScaleText,
 };

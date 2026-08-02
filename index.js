@@ -31,6 +31,7 @@ import {
   LeadingSpecialOneToOne,
   PrintDotMRR,
   MillionScaleText,
+  CompactScaleText,
 } from "./function";
 
 import { removeLeadingZeros, repeat } from "./snippet";
@@ -183,4 +184,5 @@ export {
   VERSION,
   PrintDotMRR,
   MillionScaleText,
+  CompactScaleText,
 };

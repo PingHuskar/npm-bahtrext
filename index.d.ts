@@ -66,6 +66,10 @@ export declare function MillionScaleText(
   num: string | number,
   config?: { ed?: boolean; OL?: boolean; rounding?: "c" | "f" | "" }
 ): string | undefined;
+export declare function CompactScaleText(
+  num: string | number,
+  config?: { ed?: boolean; OL?: boolean; rounding?: "c" | "f" | "" }
+): string | undefined;
 
 export declare class BR {
   constructor(num: string | number);

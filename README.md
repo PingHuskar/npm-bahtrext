@@ -27,7 +27,7 @@ For more information, please refer to the OpenTelemetry documentation.
 ## Install
 ### ES6
 ```
-npm install bahtrext@2.5.2
+npm install bahtrext@2.5.4
 ```
 ### ES5
 ```
@@ -70,11 +70,16 @@ npm install bahtrext@1.7.2
 ## Quick API Snippets
 
 ```js
-import { MillionScaleText } from "bahtrext";
+import { MillionScaleText, CompactScaleText } from "bahtrext";
 
 // Source content example: "1 ใน 5,566,857,732,147,160,000,000"
 const shortText = MillionScaleText("5,566,857,732,147,160,000,000");
 // shortText => "ห้าพันห้าร้อยหกสิบหกล้านล้านล้าน"
+
+const compactText = CompactScaleText(
+  "1035531362097366437658125676806059750189964336484946134542090486895029450514590979495591124336086177139938812952029085090597851627520000000"
+);
+// compactText => "1.036 ตามด้วยคำว่า \"ล้าน\" 23 ครั้ง"
 ```
 
 
@@ -93,8 +98,8 @@ const shortText = MillionScaleText("5,566,857,732,147,160,000,000");
 [Chadin Chaipornpisuth](https://chadindev.in.th/)
 
 ## Changes
-- 2.5.2 - add `MillionScaleText` helper for compact ล้าน-scale wording
-- 2.4.0 - Clean Code?
+- 2.5.4 - add `CompactScaleText` helper for compact scale wording
+- 2.5.3 - add `MillionScaleText` helper for compact ล้าน-scale wording
 - 2.3.4 - Infinity
 - 2.2.0 - ES6 [1.7.2]
 - 1.7.1 - apply `Rest Parameters` => add function `BulkReplace`, `applyReplacements`
