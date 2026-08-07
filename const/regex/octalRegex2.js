@@ -1,1 +1,1 @@
-export default /^0+[0-7]+$/i;
+export default /^0+[0-7]*$/i;

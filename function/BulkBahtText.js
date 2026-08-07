@@ -5,15 +5,12 @@ import ed from "../const/defaultConfig/ed";
 
 export default (
   str,
-  options = {
-    pat: defaultBulkBahtTextPat,
-    ed,
-  }
+  options = {}
 ) => {
   if (typeof str !== "string") return InvalidType;
   if (!str) return "";
 
-  const { pat, ed } = options;
+  const { pat = defaultBulkBahtTextPat, ed: edParam = ed } = options;
 
   let result = str;
   let regex =
@@ -25,7 +22,7 @@ export default (
     let number = match[0];
     const numMatch = number.match(/[\d,]+(\.\d+)?/);
     if (numMatch) number = numMatch[0];
-    result = result.replace(match[0], BF(number, ed));
+    result = result.replace(match[0], BF(number, edParam));
   }
 
   return result;

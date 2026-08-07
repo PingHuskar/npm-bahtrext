@@ -60,7 +60,7 @@ export default (BT, error = InvalidString) => {
     // Extract the last two digits (สิบ/หน่วย) using BulkReplace and SatangNum
     const VL =
       SatangNum(
-        BulkReplace(million, "", /.*แสน/, /.*หมื่น/, /.*พัน/, /.*ร้อย/)
+        BulkReplace(million, "", /.*?แสน/, /.*?หมื่น/, /.*?พัน/, /.*?ร้อย/)
       ) || `00`;
 
     // Combine all digit groups and pad to 6 digits

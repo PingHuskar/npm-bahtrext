@@ -52,7 +52,7 @@ const normalizeInput = (text) =>
     text
         .trim()
         .replace(/\s+/g, "")
-        .replace(/[.,_\-]/g, "");
+        .replace(/[.,_-]/g, "");
 
 const getBestTokenMatch = (fragment) => {
     let bestToken = "";

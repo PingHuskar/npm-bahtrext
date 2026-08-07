@@ -7,10 +7,10 @@ import INFINITY from "../const/primitive/INFINITY";
 import ISINFSTR from "./ISINFSTR";
 import { ed, OL, rounding } from "../const/defaultConfig";
 
-export default (money, config = { ed, OL, rounding }) => {
+export default (money, config = {}) => {
   if (ISINFSTR(money)) return String(INFINITY);
-  const { ed, OL, rounding } = config;
-  if (OL && isOctal(money)) {
+  const { ed: edParam = ed, OL: olParam = OL, rounding: roundingParam = rounding } = config;
+  if (olParam && isOctal(money)) {
     money = toDec(money);
   } else if (isBin(money)) {
     money = toBin(money);
@@ -19,8 +19,8 @@ export default (money, config = { ed, OL, rounding }) => {
   }
 
   const rBahtText = BahtText(money, {
-    ed,
-    rounding,
+    ed: edParam,
+    rounding: roundingParam,
     ClErr: () => MoneyInvalid,
   });
 

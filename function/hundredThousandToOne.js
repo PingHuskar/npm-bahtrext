@@ -27,7 +27,7 @@ export default (digits, ed = false) => {
   let w = ``;
   const Z = padWithLeadingZeros(digits, 6);
   Z.split("").forEach((d, i) => {
-    d = parseInt(d);
+    d = Number.parseInt(d, 10);
     if (!d) return;
     if (i === 4 && (w += getDigit(d))) return;
     if (i === 5) {
