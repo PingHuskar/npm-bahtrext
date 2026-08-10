@@ -1,1 +1,1 @@
-export default `สิบ`;
+export default `\u0e2a\u0e34\u0e1a`;

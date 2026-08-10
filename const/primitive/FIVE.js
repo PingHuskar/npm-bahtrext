@@ -1,1 +1,1 @@
-export default `ห้า`;
+export default `\u0e2b\u0e49\u0e32`;

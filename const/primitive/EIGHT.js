@@ -1,1 +1,1 @@
-export default `แปด`;
+export default `\u0e41\u0e1b\u0e14`;

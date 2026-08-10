@@ -1,1 +1,1 @@
-export default `หมื่น`;
+export default `\u0e2b\u0e21\u0e37\u0e48\u0e19`;

@@ -1,1 +1,1 @@
-export default `สี่`;
+export default `\u0e2a\u0e35\u0e48`;

@@ -1,1 +1,1 @@
-export default `สาม`;
+export default `\u0e2a\u0e32\u0e21`;

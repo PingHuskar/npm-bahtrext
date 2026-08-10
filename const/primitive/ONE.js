@@ -1,1 +1,1 @@
-export default `หนึ่ง`;
+export default `\u0E2B\u0E19\u0E36\u0E48\u0E07`;

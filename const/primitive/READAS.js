@@ -1,1 +1,1 @@
-export default `อ่านว่า`;
+export default `\u0e2d\u0e48\u0e32\u0e19\u0e27\u0e48\u0e32`;

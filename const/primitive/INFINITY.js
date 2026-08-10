@@ -1,1 +1,1 @@
-export default `อนันต์`;
+export default `\u0e2d\u0e19\u0e31\u0e19\u0e15\u0e4c`;

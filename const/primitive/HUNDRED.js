@@ -1,1 +1,1 @@
-export default `ร้อย`;
+export default `\u0e23\u0e49\u0e2d\u0e22`;

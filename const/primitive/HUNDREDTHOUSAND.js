@@ -1,1 +1,1 @@
-export default `แสน`;
+export default `\u0e41\u0e2a\u0e19`;

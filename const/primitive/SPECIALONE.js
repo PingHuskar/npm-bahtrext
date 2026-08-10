@@ -1,1 +1,1 @@
-export default `เอ็ด`;
+export default `\u0e40\u0e2d\u0e47\u0e14`;

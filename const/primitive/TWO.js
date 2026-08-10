@@ -1,1 +1,1 @@
-export default `สอง`;
+export default `\u0e2a\u0e2d\u0e07`;

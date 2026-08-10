@@ -1,1 +1,1 @@
-export default `ศูนย์`;
+export default `\u0e28\u0e39\u0e19\u0e22\u0e4c`;

@@ -1,1 +1,1 @@
-export default `ลบ`;
+export default `\u0e25\u0e1a`;

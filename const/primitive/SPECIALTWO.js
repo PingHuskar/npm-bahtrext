@@ -1,1 +1,1 @@
-export default `ยี่`;
+export default `\u0e22\u0e35\u0e48`;

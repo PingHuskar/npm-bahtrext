@@ -115,9 +115,9 @@ const normalizeCorrectedText = (text) => {
         .replace(/(สตางค์)+/g, SATANG)
         .replace(/(ถ้วน)+/g, FULLBAHT)
         // Canonical Thai forms used by existing TB parser
-        .replace(/สองสิบ/g, "ยี่สิบ")
-        .replace(/สิบหนึ่ง/g, "สิบเอ็ด")
-        .replace(/ยี่สิบหนึ่ง/g, "ยี่สิบเอ็ด");
+        .replace(/สองสิบ/g, "\u0e22\u0e35\u0e48\u0e2a\u0e34\u0e1a")
+        .replace(/สิบหนึ่ง/g, "\u0e2a\u0e34\u0e1a\u0e40\u0e2d\u0e47\u0e14")
+        .replace(/ยี่สิบหนึ่ง/g, "\u0e22\u0e35\u0e48\u0e2a\u0e34\u0e1a\u0e40\u0e2d\u0e47\u0e14");
 
     if (corrected.endsWith(BAHT)) {
         corrected = `${corrected}${FULLBAHT}`;

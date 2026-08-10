@@ -1,1 +1,1 @@
-export default `เก้า`;
+export default `\u0e40\u0e01\u0e49\u0e32`;

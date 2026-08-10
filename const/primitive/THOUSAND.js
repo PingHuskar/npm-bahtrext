@@ -1,1 +1,1 @@
-export default `พัน`;
+export default `\u0e1e\u0e31\u0e19`;

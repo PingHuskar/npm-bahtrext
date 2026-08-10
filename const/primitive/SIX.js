@@ -1,1 +1,1 @@
-export default `หก`;
+export default `\u0e2b\u0e01`;

@@ -1,1 +1,1 @@
-export default "จุด";
+export default "\u0e08\u0e38\u0e14";

@@ -1,1 +1,1 @@
-export default `สตางค์`;
+export default `\u0e2a\u0e15\u0e32\u0e07\u0e04\u0e4c`;
