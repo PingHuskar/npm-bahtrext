@@ -9,6 +9,6 @@ export default (digit) => {
     case "2":
       return `${SPECIALTWO}${TEN}`;
     default:
-      return `${THAINUMBERWORDS[parseInt(digit)]}${TEN}`;
+      return `${THAINUMBERWORDS[Number.parseInt(digit)]}${TEN}`;
   }
 };

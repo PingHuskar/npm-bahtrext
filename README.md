@@ -27,7 +27,7 @@ For more information, please refer to the OpenTelemetry documentation.
 ## Install
 ### ES6
 ```
-npm install bahtrext@2.5.4
+npm install bahtrext@2.5.5
 ```
 ### ES5
 ```
@@ -98,6 +98,7 @@ const compactText = CompactScaleText(
 [Chadin Chaipornpisuth](https://chadindev.in.th/)
 
 ## Changes
+- 2.5.5 - update Thai numeral exports to Unicode representations, enhance internal auto-correction, and improve parameter handling and regex patterns
 - 2.5.4 - add `CompactScaleText` helper for compact scale wording
 - 2.5.3 - add `MillionScaleText` helper for compact ล้าน-scale wording
 - 2.3.4 - Infinity

@@ -1,4 +1,4 @@
-import tryCatch from "try-catch";
+import { tryCatch } from "try-catch";
 import {
   VERSION,
   THAI2ARABICNumerals,
@@ -134,7 +134,7 @@ class BR {
   }
 
   get printSatang() {
-    const [, result] = tryCatch(() => this.auto.replace(/.+บาท/g, ``));
+    const [, result] = tryCatch(() => this.auto.replace(/.+?บาท/g, ``));
     return result || "";
   }
 

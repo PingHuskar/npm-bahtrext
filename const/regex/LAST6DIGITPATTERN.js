@@ -1,1 +1,1 @@
-export default /\d{1,6}$/g;
+export default /\d{1,6}$/;

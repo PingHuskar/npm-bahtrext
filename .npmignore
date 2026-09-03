@@ -4,3 +4,5 @@ compare.test.js
 .git
 Jenkinsfile
 tracer.js
+out.js
+*.test.js
