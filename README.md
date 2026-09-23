@@ -1,4 +1,4 @@
-# [BahtRext](https://pinghuskar.github.io/npm-bahtrext/)
+# [BahtRext](https://pinghuskar.gitlab.io/npm-bahtrext/)
 ![Download/month](https://img.shields.io/npm/dm/bahtrext.svg)
 ![Total Download](https://img.shields.io/npm/dt/bahtrext.svg)
 
@@ -34,15 +34,6 @@ npm install bahtrext@2.5.5
 npm install bahtrext@1.7.2
 ```
 
-## Demo / Example
-- [Webpack (1.4.5)](https://webpack.js.org/)
-  - [REPO](https://github.com/PingHuskar/webpack-bahtrext)
-  - [DEMO](https://pinghuskar.github.io/webpack-bahtrext/)
-  - [scripts](https://pinghuskar.github.io/webpack-bahtrext/main.js)
-- React
-  - [BahtGame](https://timely-fenglisu-b68fd6.netlify.app/)
-  - [scroll-trigger](https://github.com/PingHuskar/bahtrext-scroll-trigger)
-
 ## Must Read
 - **Checkout Test Cases in `index.test.js`**
 - **`101`** ควรจะถูกอ่านอย่างไร ?
@@ -54,11 +45,11 @@ npm install bahtrext@1.7.2
   - `หนึ่งร้อยเอ็ดบาทถ้วน`
     - [`MS Excel`](https://www.microsoft.com/th-th/microsoft-365/excel)
     - [`thai-baht-text`](https://www.npmjs.com/package/thai-baht-text)
-    - [earthchie/BAHTTEXT.js](https://github.com/earthchie/BAHTTEXT.js)
+    - [earthchie/BAHTTEXT.js](https://gitlab.com/earthchie/BAHTTEXT.js)
   - `หนึ่งร้อยหนึ่งบาทถ้วน` หรือ `หนึ่งร้อยเอ็ดบาทถ้วน` ก็ได้ ให้เข้าใจได้ตรงกัน
     - [**`BahtRext`**](https://pinghuskar.github.io/npm-bahtrext/)
       - [Active Versions](https://www.npmjs.com/package/bahtrext?activeTab=versions)
-      - [GitHub Repo](https://github.com/PingHuskar/npm-bahtrext)
+      - [GitLab Repo](https://gitlab.com/PingHuskar/npm-bahtrext)
 
 ## Beliefs
 1. Money in Thai Baht can be translate to word
@@ -88,11 +79,11 @@ const compactText = CompactScaleText(
 
 ## 😊 Plz Consider
 - [Line Sticker](https://store.line.me/stickershop/product/28717665/en)
-- [Give A Star](https://github.com/PingHuskar/npm-bahtrext)
+- [Give A Star](https://gitlab.com/PingHuskar/npm-bahtrext)
 - [ProductHunt](https://www.producthunt.com/products/bahtrext)
 - Write a Review
 - Submit Test Case(s)
-- [GitHub Sponsors](https://github.com/sponsors/PingHuskar)
+- [GitLab Sponsors](https://gitlab.com/sponsors/PingHuskar)
 
 ## Author
 [Chadin Chaipornpisuth](https://chadindev.in.th/)
