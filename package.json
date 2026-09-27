@@ -1,6 +1,6 @@
 {
   "name": "bahtrext",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "description": "BahtText Stringify",
   "type": "module",
   "main": "index.js",

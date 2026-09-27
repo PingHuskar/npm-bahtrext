@@ -22,6 +22,7 @@ import BR, {
   VERSION,
   MillionScaleText,
   CompactScaleText,
+  SortNumText,
 } from ".";
 import op from "operation-strint";
 import { InvalidType, InvalidString } from "./const/error";
@@ -513,6 +514,19 @@ test("CompactScaleText", () => {
       `1035531362097366437658125676806059750189964336484946134542090486895029450514590979495591124336086177139938812952029085090597851627520000000`
     )
   ).toBe(`1.036` + ` ตามด้วยคำว่า "${MILLION}" ` + `23` + ` ครั้ง`);
+});
+
+test("SortNumText", () => {
+  const func = SortNumText;
+  expect(func(["สอง", "หก", "หนึ่ง"])).toEqual(["หนึ่ง", "สอง", "หก"]);
+  expect(func(["สอง", "หก", "หนึ่ง"], { desc: true })).toEqual(["หก", "สอง", "หนึ่ง"]);
+  expect(func(["หนึ่งล้านล้าน", "ศูนย์", "สิบเอ็ด", "ห้าสิบสตางค์", "สองบาทห้าสิบสตางค์"])).toEqual([
+    "ศูนย์", "ห้าสิบสตางค์", "สองบาทห้าสิบสตางค์", "สิบเอ็ด", "หนึ่งล้านล้าน",
+  ]);
+  expect(func(["สอง", "abc", "หก", "สองสอง", "หนึ่ง"])).toEqual(["หนึ่ง", "สอง", "หก", "abc", "สองสอง"]);
+  expect(func(["สอง", "abc", "หก", 5, "หนึ่ง"], { removeInvalid: true })).toEqual(["หนึ่ง", "สอง", "หก"]);
+  expect(func(["สอง", "abc", "หก"], { desc: true, removeInvalid: true })).toEqual(["หก", "สอง"]);
+  expect(func("สอง")).toBe(InvalidType);
 });
 
 test(`minus bt`, () => {

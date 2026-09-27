@@ -71,6 +71,11 @@ export declare function CompactScaleText(
   config?: { ed?: boolean; OL?: boolean; rounding?: "c" | "f" | "" }
 ): string | undefined;
 
+export declare function SortNumText(
+  arr: string[],
+  options?: { desc?: boolean; removeInvalid?: boolean }
+): string[];
+
 export declare class BR {
   constructor(num: string | number);
 

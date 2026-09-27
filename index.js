@@ -32,6 +32,7 @@ import {
   PrintDotMRR,
   MillionScaleText,
   CompactScaleText,
+  SortNumText,
 } from "./function";
 
 import { removeLeadingZeros, repeat } from "./snippet";
@@ -185,4 +186,5 @@ export {
   PrintDotMRR,
   MillionScaleText,
   CompactScaleText,
+  SortNumText,
 };

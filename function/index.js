@@ -24,6 +24,7 @@ import LeadingSpecialOneToOne from "./LeadingSpecialOneToOne";
 import PrintDotMRR from "./PrintDotMRR";
 import MillionScaleText from "./MillionScaleText";
 import CompactScaleText from "./CompactScaleText";
+import SortNumText from "./SortNumText";
 
 export {
   MoneyLaundering,
@@ -51,4 +52,5 @@ export {
   PrintDotMRR,
   MillionScaleText,
   CompactScaleText,
+  SortNumText,
 };
