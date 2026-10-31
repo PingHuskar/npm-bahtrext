@@ -22,7 +22,7 @@ export default (
     let number = match[0];
     const numMatch = number.match(/[\d,]+(\.\d+)?/);
     if (numMatch) number = numMatch[0];
-    result = result.replace(match[0], BF(number, edParam));
+    result = result.replace(match[0], BF(number, { ed: edParam }));
   }
 
   return result;

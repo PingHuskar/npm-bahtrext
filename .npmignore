@@ -6,3 +6,4 @@ Jenkinsfile
 tracer.js
 out.js
 *.test.js
+sql

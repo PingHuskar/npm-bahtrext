@@ -2,9 +2,12 @@ import SatangNum from "./SatangNum";
 import IsValidText from "./IsValidText";
 import { padWithLeadingZeros, removeLeadingZeros } from "../snippet";
 import THAINUMBERWORDS from "../const/array/THAINUMBERWORDS";
-import { FULLBAHT, BAHT, SATANG, MILLION, ZERO } from "../const";
+import { FULLBAHT, BAHT, SATANG, MILLION, ZERO, SPECIALONE } from "../const";
 import BulkReplace from "../snippet/BulkReplace";
 import InvalidString from "../const/error/InvalidString";
+
+// Reads the last two digits of a group, where a lone "เอ็ด" means 1 (e.g. หนึ่งร้อยเอ็ด).
+const lastTwoDigits = (word) => (word === SPECIALONE ? `01` : SatangNum(word));
 
 // Converts Thai Baht text (BT) to a numeric string representation.
 // Returns the numeric value as a string, or the error string if conversion fails.
@@ -31,8 +34,8 @@ export default (BT, error = InvalidString) => {
 
   for (const million of millions) {
     // If the group is a simple number word, convert directly
-    if (SatangNum(million)) {
-      moneyBahts.push(padWithLeadingZeros(SatangNum(million), 6));
+    if (lastTwoDigits(million)) {
+      moneyBahts.push(padWithLeadingZeros(lastTwoDigits(million), 6));
       continue;
     }
 
@@ -59,8 +62,8 @@ export default (BT, error = InvalidString) => {
 
     // Extract the last two digits (สิบ/หน่วย) using BulkReplace and SatangNum
     const VL =
-      SatangNum(
-        BulkReplace(million, "", /.*แสน/, /.*หมื่่น/, /.*พัน/, /.*ร้อย/)
+      lastTwoDigits(
+        BulkReplace(million, "", /.*แสน/, /.*หมื่น/, /.*พัน/, /.*ร้อย/)
       ) || `00`;
 
     // Combine all digit groups and pad to 6 digits

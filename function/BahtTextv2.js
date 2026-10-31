@@ -35,6 +35,9 @@ export default (money, options = {}) => {
   const opsum = sum(satang_part.carry, moneyInt === `` ? `0` : moneyInt);
   const new_baht = opsum === `` ? `0` : opsum;
 
-  const baht_part = PrintBaht(new_baht, edOption).replace(/^บาท$/, "");
+  const baht_part = PrintBaht(new_baht, edOption).replace(
+    /^บาท$/,
+    satang_part.word === FULLBAHT ? `${THAINUMBERWORDS[0]}${BAHT}` : ""
+  );
   return `${baht_part}${satang_part.word}`;
 };

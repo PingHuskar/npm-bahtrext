@@ -93,26 +93,26 @@ class BR {
   }
 
   get auto() {
-    return ABT(this.#num, this.#ed);
+    return ABT(this.#num, { ed: this.#ed });
   }
   get text() {
-    const result = B2(this.#num, this.#ed);
+    const result = B2(this.#num, { ed: this.#ed });
     return typeof result === "string" ? result : "";
   }
   get num() {
     return TB(this.auto);
   }
   get flex() {
-    return BF(this.#num);
+    return BF(this.#num, { ed: this.#ed });
   }
   get neg() {
-    return NEG(this.#num);
+    return NEG(this.#num, this.#ed);
   }
   get sep() {
     return SEP(this.#num);
   }
   get bahttext() {
-    const result = BahtText(this.#num);
+    const result = BahtText(this.#num, this.#ed);
     return typeof result === "string" ? result : "";
   }
   get bathtext() {

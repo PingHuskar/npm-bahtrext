@@ -36,7 +36,10 @@ export default (
   const opsum = sum(satang_part.carry, moneyInt === `` ? `0` : moneyInt);
   const new_baht = opsum === `` ? `0` : opsum;
 
-  const baht_part = PrintBaht(new_baht, ed).replace(/^บาท$/, "");
+  const baht_part = PrintBaht(new_baht, ed).replace(
+    /^บาท$/,
+    satang_part.word === FULLBAHT ? `${THAINUMBERWORDS[0]}${BAHT}` : ""
+  );
   console.warn(`Consider Use BahtTextv2`);
   return `${
     currencyformat ? currencyformat.format(moneyFull) : moneyFull

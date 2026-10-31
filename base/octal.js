@@ -14,5 +14,5 @@ export const isOctal = (money) => {
   return octalRegex1.test(money) || octalRegex2.test(money);
 };
 
-export const toDecOctal = (num) => toDec(num, 8, octalRegex1, /^0+o?/);
+export const toDecOctal = (num) => toDec(num, 8, octalRegex1, /^0+o?/i);
 

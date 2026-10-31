@@ -5,4 +5,4 @@ export default (money, rounding = defaultRounding) =>
   (typeof money === "string" || typeof money === "number") &&
   (rounding === ""
     ? SPLITPATTERN.test(String(money))
-    : /\d*(\.\d+)?|\d+n?/.test(String(money)));
+    : /^\d*(\.\d*)?n?$/.test(String(money)));

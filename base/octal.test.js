@@ -23,6 +23,7 @@ test(`isOctal`, () => {
 test(`toDec`, () => {
     expect(toDec(`077`)).toBe(`63`);
     expect(toDec(`0o17`)).toBe(`15`);
+    expect(toDec(`0O17`)).toBe(`15`);
     expect(toDec(`0532`)).toBe(`346`);
     expect(toDec(`05325646`)).toBe(`1420198`);
     expect(toDec(234)).toBe(234);

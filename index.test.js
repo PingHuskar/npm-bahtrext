@@ -722,3 +722,94 @@ describe("BR Class", () => {
     expect(br.isValid).toBeTruthy(); // Adjust based on IsMoneyValidate function
   });
 });
+
+describe("Decimal handling", () => {
+  test("floor keeps the satang value and never carries by accident", () => {
+    expect(BT(`1.100`, false, false, `f`)).toBe(`หนึ่งบาทสิบสตางค์`);
+    expect(BT(`5.100`, false, false, `f`)).toBe(`ห้าบาทสิบสตางค์`);
+    expect(BT(`1.0001`, false, false, `f`)).toBe(`หนึ่งบาทถ้วน`);
+    expect(BT(`0.001`, false, false, `f`)).toBe(`ศูนย์บาทถ้วน`);
+  });
+
+  test("ceiling adds one satang, including after a leading zero", () => {
+    expect(BT(`1.001`, false, false, `c`)).toBe(`หนึ่งบาทหนึ่งสตางค์`);
+    expect(BT(`0.001`, false, false, `c`)).toBe(`หนึ่งสตางค์`);
+    expect(BT(`21.0424`, false, false, `c`)).toBe(`ยี่สิบเอ็ดบาทห้าสตางค์`);
+    expect(BT(`36610487.009`, false, false, `c`)).toBe(
+      `สามสิบหกล้านหกแสนหนึ่งหมื่นสี่ร้อยแปดสิบเจ็ดบาทหนึ่งสตางค์`
+    );
+    expect(BT(`0.999`, false, false, `c`)).toBe(`หนึ่งบาทถ้วน`);
+  });
+
+  test("zeros after the second decimal place are allowed without rounding", () => {
+    expect(BT(`12.340`)).toBe(`สิบสองบาทสามสิบสี่สตางค์`);
+    expect(BT(`12.3400`)).toBe(`สิบสองบาทสามสิบสี่สตางค์`);
+    expect(BT(`12.345`)).toBeUndefined();
+  });
+
+  test("PrintSatangs matches the SQL port", () => {
+    expect(PrintSatangs(`100`)).toEqual({ word: `สิบสตางค์`, carry: `0` });
+    expect(PrintSatangs(`120`)).toEqual({ word: `สิบสองสตางค์`, carry: `0` });
+    expect(PrintSatangs(`100`, `f`)).toEqual({ word: `สิบสตางค์`, carry: `0` });
+    expect(PrintSatangs(`001`, `c`)).toEqual({ word: `หนึ่งสตางค์`, carry: `0` });
+    expect(PrintSatangs(`001`, `f`)).toEqual({ word: FULLBAHT, carry: `0` });
+    expect(PrintSatangs(`019`, `c`)).toEqual({ word: `สองสตางค์`, carry: `0` });
+    expect(PrintSatangs(`995`, `c`)).toEqual({ word: FULLBAHT, carry: `1` });
+  });
+
+  test("non-numeric input stays invalid when rounding", () => {
+    expect(BT(`abc`, false, false, `c`)).toBeUndefined();
+    expect(BT(`1.2.3`, false, false, `f`)).toBeUndefined();
+    expect(BT(`1.5`, false, false, `c`)).toBe(`หนึ่งบาทห้าสิบสตางค์`);
+  });
+});
+
+describe("Negative amounts", () => {
+  test("invalid amounts return an empty string", () => {
+    expect(NEG(`-`)).toBe(``);
+    expect(NEG(`-abc`)).toBe(``);
+  });
+
+  test("zero is not read as negative", () => {
+    expect(NEG(`-0`)).toBe(`ศูนย์บาทถ้วน`);
+    expect(NEG(`-0.00`)).toBe(`ศูนย์บาทถ้วน`);
+  });
+});
+
+describe("ed option", () => {
+  test("BR.toggleed changes every reading", () => {
+    const br = new BR(`101`).toggleed();
+    expect(br.text).toBe(`หนึ่งร้อยเอ็ดบาทถ้วน`);
+    expect(br.auto).toBe(`หนึ่งร้อยเอ็ดบาทถ้วน`);
+    expect(br.flex).toBe(`หนึ่งร้อยเอ็ดบาทถ้วน`);
+    expect(br.neg).toBe(`หนึ่งร้อยเอ็ดบาทถ้วน`);
+    expect(br.bahttext).toBe(`฿101.00 อ่านว่า "หนึ่งร้อยเอ็ดบาทถ้วน"`);
+    expect(br.num).toBe(`101.00`);
+    expect(br.toggleed().text).toBe(`หนึ่งร้อยหนึ่งบาทถ้วน`);
+  });
+
+  test("BulkBahtText applies ed", () => {
+    expect(BulkBahtText(`ราคา 101`, { ed: true })).toBe(`ราคา หนึ่งร้อยเอ็ดบาทถ้วน`);
+    expect(BulkBahtText(`ราคา 101`)).toBe(`ราคา หนึ่งร้อยหนึ่งบาทถ้วน`);
+  });
+});
+
+describe("TB reads every digit", () => {
+  test("digits after หมื่น", () => {
+    expect(TB(`สองหมื่นห้าบาท`)).toBe(`20005.00`);
+    expect(TB(`หนึ่งหมื่นหกสิบหกบาทเก้าสิบสองสตางค์`)).toBe(`10066.92`);
+    expect(TB(`สองหมื่นสิบเอ็ดบาท`)).toBe(`20011.00`);
+  });
+
+  test("a lone เอ็ด", () => {
+    expect(TB(`หนึ่งร้อยเอ็ดบาทถ้วน`)).toBe(`101.00`);
+    expect(TB(`หนึ่งล้านเอ็ดบาท`)).toBe(`1000001.00`);
+  });
+
+  test("round trips with BT", () => {
+    for (const money of [`40002.84`, `80002202286.64`, `3002600060080.00`, `1000001000001.01`]) {
+      expect(TB(BT(money))).toBe(money);
+      expect(TB(BT(money, true))).toBe(money);
+    }
+  });
+});
